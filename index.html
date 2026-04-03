@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>Raja S | Web Developer Portfolio</title>
-    <!-- Google Fonts + Font Awesome Icons -->
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap"
         rel="stylesheet">
@@ -33,6 +32,11 @@
             overflow-x: hidden !important;
             position: relative;
             width: 100%;
+        }
+
+        /* FIX: Prevent background scroll when mobile menu is open */
+        body.menu-open {
+            overflow: hidden !important;
         }
 
         /* Hide custom cursor on mobile */
@@ -126,7 +130,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            /* HOVER: logo pulse */
             transition: filter 0.3s ease, transform 0.3s ease;
             cursor: default;
         }
@@ -144,7 +147,6 @@
             font-weight: 600;
             transition: 0.3s ease;
             font-size: 1rem;
-            /* HOVER: underline slide effect */
             position: relative;
         }
         .nav-links a::after {
@@ -171,15 +173,14 @@
             color: #38bdf8;
             font-size: 1.8rem;
             cursor: pointer;
-            /* HOVER: hamburger */
             transition: color 0.3s ease, transform 0.3s ease;
+            z-index: 1100; /* FIX: Keep hamburger above mobile menu overlay */
         }
         .hamburger:hover {
             color: #c084fc;
-            transform: rotate(90deg);
         }
 
-        /* ========== HERO SECTION - CLEAN MOBILE ========== */
+        /* ========== HERO SECTION ========== */
         .hero {
             display: flex;
             align-items: center;
@@ -190,7 +191,6 @@
             gap: 3rem;
             width: 100%;
         }
-        /* Desktop: image on right, text on left */
         @media (min-width: 769px) {
             .hero {
                 flex-direction: row;
@@ -203,7 +203,6 @@
                 justify-content: flex-start;
             }
         }
-        /* Mobile: stack vertically, center everything */
         @media (max-width: 768px) {
             .hero {
                 flex-direction: column;
@@ -236,8 +235,7 @@
             color: #7dd3fc;
             margin-bottom: 1.5rem;
             border: 1px solid rgba(56, 189, 248, 0.4);
-            /* HOVER: badge */
-            transition: background 0.3s ease, border-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
             cursor: default;
         }
         .badge:hover {
@@ -289,7 +287,6 @@
             color: #0f172a;
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
         }
-        /* HOVER: btn-primary */
         .btn-primary:hover {
             background: linear-gradient(135deg, #7dd3fc, #60a5fa);
             box-shadow: 0 8px 30px rgba(56, 189, 248, 0.65);
@@ -301,7 +298,6 @@
             border: 1.5px solid #38bdf8;
             color: #38bdf8;
         }
-        /* HOVER: btn-outline */
         .btn-outline:hover {
             background: rgba(56, 189, 248, 0.12);
             border-color: #7dd3fc;
@@ -309,7 +305,6 @@
             box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
             transform: translateY(-3px) scale(1.04);
         }
-        /* Image - PERFECTLY CENTERED ON ALL DEVICES */
         .hero-image {
             flex: 0.8;
             display: flex;
@@ -324,7 +319,6 @@
             animation: floatGlow 4s ease-in-out infinite;
             pointer-events: none;
             display: inline-block;
-            /* HOVER: image wrapper glow */
             transition: box-shadow 0.4s ease;
         }
         .img-wrapper:hover {
@@ -344,27 +338,16 @@
             user-select: none;
             -webkit-user-drag: none;
         }
-        /* Mobile image size */
         @media (max-width: 768px) {
-            .hero-image img {
-                width: 180px;
-                height: 180px;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
+            .hero-image img { width: 180px; height: 180px; }
+            .hero h1 { font-size: 2.2rem; }
         }
         @media (max-width: 480px) {
-            .hero-image img {
-                width: 150px;
-                height: 150px;
-            }
-            .hero h1 {
-                font-size: 1.8rem;
-            }
+            .hero-image img { width: 150px; height: 150px; }
+            .hero h1 { font-size: 1.8rem; }
         }
 
-        /* ========== SECTIONS - NO OVERFLOW ========== */
+        /* ========== SECTIONS ========== */
         section {
             padding: 4rem 1.5rem;
             max-width: 1200px;
@@ -372,9 +355,7 @@
             width: 100%;
         }
         @media (max-width: 768px) {
-            section {
-                padding: 3rem 1rem;
-            }
+            section { padding: 3rem 1rem; }
         }
         .section-title {
             text-align: center;
@@ -396,20 +377,13 @@
             background: linear-gradient(90deg, #38bdf8, #a78bfa);
             margin: 1rem auto 0;
             border-radius: 4px;
-            /* HOVER: underline expand on section title */
             transition: width 0.4s ease;
         }
-        .section-title:hover::after {
-            width: 120px;
-        }
+        .section-title:hover::after { width: 120px; }
         @media (max-width: 768px) {
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
+            .section-title { font-size: 2rem; margin-bottom: 2rem; }
         }
 
-        /* About Card */
         .about-card, .project-card {
             background: rgba(30, 41, 59, 0.4);
             backdrop-filter: blur(16px);
@@ -418,7 +392,6 @@
             border: 1px solid rgba(56, 189, 248, 0.3);
             transition: all 0.3s ease;
         }
-        /* HOVER: about-card */
         .about-card:hover {
             background: rgba(30, 41, 59, 0.6);
             border-color: rgba(56, 189, 248, 0.6);
@@ -426,12 +399,9 @@
             transform: translateY(-4px);
         }
         @media (max-width: 768px) {
-            .about-card, .project-card {
-                padding: 1.5rem;
-            }
+            .about-card, .project-card { padding: 1.5rem; }
         }
 
-        /* Skills */
         .skills-grid {
             display: flex;
             justify-content: center;
@@ -451,7 +421,6 @@
             transition: all 0.3s ease;
             cursor: default;
         }
-        /* HOVER: skill items */
         .skill-item:hover {
             background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(30, 41, 59, 0.9));
             border-color: rgba(56, 189, 248, 0.75);
@@ -459,21 +428,12 @@
             transform: translateY(-4px) scale(1.05);
             color: #e0f2fe;
         }
+        .skill-item i { transition: filter 0.3s ease, transform 0.3s ease; }
         .skill-item:hover i {
             filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
             transform: rotate(-8deg);
         }
-        .skill-item i {
-            transition: filter 0.3s ease, transform 0.3s ease;
-        }
-        @media (max-width: 480px) {
-            .skill-item {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.9rem;
-            }
-        }
 
-        /* Tech Tags */
         .tech-tag {
             display: inline-block;
             background: rgba(15, 23, 42, 0.9);
@@ -484,7 +444,6 @@
             margin: 0 0.3rem 0.6rem;
             color: #90cdf4;
             border: 1px solid rgba(56, 189, 248, 0.3);
-            /* HOVER: tech tags */
             transition: all 0.25s ease;
             cursor: default;
         }
@@ -493,10 +452,8 @@
             border-color: rgba(56, 189, 248, 0.65);
             color: #e0f2fe;
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(56, 189, 248, 0.2);
         }
 
-        /* Project Button */
         .view-project-btn {
             background: linear-gradient(135deg, #38bdf8, #3b82f6);
             color: #0f172a;
@@ -504,23 +461,19 @@
             margin-top: 1rem;
             display: inline-flex;
         }
-        /* HOVER: view project btn */
         .view-project-btn:hover {
             background: linear-gradient(135deg, #7dd3fc, #60a5fa);
-            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.6);
             transform: translateY(-3px) scale(1.04);
             color: #0f172a;
         }
 
-        /* HOVER: project card */
         .project-card:hover {
             background: rgba(30, 41, 59, 0.65);
             border-color: rgba(56, 189, 248, 0.6);
-            box-shadow: 0 25px 60px rgba(56, 189, 248, 0.15), 0 0 0 1px rgba(56, 189, 248, 0.2);
+            box-shadow: 0 25px 60px rgba(56, 189, 248, 0.15);
             transform: translateY(-6px);
         }
 
-        /* Contact */
         .contact-container {
             display: flex;
             justify-content: center;
@@ -541,50 +494,20 @@
             font-weight: 600;
             font-size: 0.9rem;
         }
-        /* HOVER: contact cards */
         .contact-card:hover {
             background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(15, 23, 42, 0.95));
             border-color: rgba(56, 189, 248, 0.7);
-            color: #e0f2fe;
-            box-shadow: 0 10px 30px rgba(56, 189, 248, 0.3);
             transform: translateY(-4px) scale(1.04);
         }
-        .contact-card i {
-            transition: transform 0.3s ease, filter 0.3s ease;
-        }
-        .contact-card:hover i {
-            transform: scale(1.25) rotate(-6deg);
-            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
-        }
-        @media (max-width: 600px) {
-            .contact-card {
-                padding: 0.6rem 1rem;
-                font-size: 0.8rem;
-            }
-            .contact-card i {
-                font-size: 0.9rem;
-            }
-        }
 
-        /* Footer */
         footer {
             text-align: center;
             padding: 2rem 1rem;
             background: linear-gradient(180deg, #020617, #03071a);
             border-top: 1px solid rgba(56, 189, 248, 0.2);
             width: 100%;
-            /* HOVER: footer heart */
-        }
-        footer .fa-heart {
-            transition: transform 0.3s ease, filter 0.3s ease;
-            display: inline-block;
-        }
-        footer:hover .fa-heart {
-            transform: scale(1.4);
-            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
         }
 
-        /* Scroll Top */
         .scroll-top {
             position: fixed;
             bottom: 20px;
@@ -601,24 +524,9 @@
             visibility: hidden;
             transition: all 0.3s ease;
             z-index: 999;
-            box-shadow: 0 5px 15px rgba(56, 189, 248, 0.4);
         }
-        .scroll-top.show {
-            opacity: 1;
-            visibility: visible;
-        }
-        /* HOVER: scroll top button */
-        .scroll-top:hover {
-            background: linear-gradient(135deg, #7dd3fc, #a78bfa);
-            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.65);
-            transform: translateY(-4px) scale(1.1);
-        }
-        .scroll-top i {
-            color: #0f172a;
-            font-size: 1.3rem;
-        }
+        .scroll-top.show { opacity: 1; visibility: visible; }
 
-        /* Animations */
         .fade-up {
             opacity: 0;
             transform: translateY(30px);
@@ -629,12 +537,6 @@
             transform: translateY(0);
         }
 
-        /* Disable modal */
-        .image-modal {
-            display: none !important;
-        }
-
-        /* Ripple */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -643,133 +545,41 @@
             animation: rippleAnim 0.6s linear;
             pointer-events: none;
         }
-        @keyframes rippleAnim {
-            to { transform: scale(4); opacity: 0; }
-        }
-        .btn-primary, .btn-outline, .view-project-btn {
-            position: relative;
-            overflow: hidden;
-        }
+        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
 
-        /* CRITICAL FIXES FOR MOBILE - NO EXTRA SPACE */
+        /* CRITICAL FIXES FOR MOBILE */
         @media (max-width: 768px) {
-            /* Remove any possible margin/padding that creates white space */
-            body, html {
-                overflow-x: hidden !important;
-                width: 100% !important;
-            }
+            body, html { overflow-x: hidden !important; width: 100% !important; }
+            nav { padding: 0.8rem 1rem; }
+            .hamburger { display: block; }
 
-            /* Lock scroll when menu is open */
-            body.menu-open {
-                overflow: hidden !important;
-            }
-            
-            /* Navbar mobile */
-            nav {
-                padding: 0.8rem 1rem;
-            }
-            .hamburger {
-                display: block;
-                z-index: 1100;
-                position: relative;
-            }
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 75%;
-                max-width: 280px;
+                width: 80%;
+                max-width: 300px;
                 height: 100vh;
                 background: rgba(2, 6, 23, 0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
-                justify-content: flex-start;
+                justify-content: flex-start; /* FIX: Place options at the top side */
+                padding-top: 6rem; /* Space from top */
                 align-items: center;
-                padding-top: 5rem;
                 gap: 2rem;
                 transition: right 0.3s ease;
                 z-index: 1050;
                 box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
                 border-left: 1px solid rgba(56, 189, 248, 0.4);
             }
-            .nav-links.active {
-                right: 0;
-            }
-
-            /* Close (X) button inside the drawer */
-            .nav-close-btn {
-                display: flex;
-                position: absolute;
-                top: 1.1rem;
-                right: 1.2rem;
-                background: rgba(56, 189, 248, 0.12);
-                border: 1px solid rgba(56, 189, 248, 0.4);
-                color: #38bdf8;
-                font-size: 1.4rem;
-                width: 40px;
-                height: 40px;
-                border-radius: 50%;
-                align-items: center;
-                justify-content: center;
-                cursor: pointer;
-                transition: background 0.3s ease, transform 0.3s ease;
-                z-index: 1060;
-            }
-            .nav-close-btn:hover {
-                background: rgba(56, 189, 248, 0.25);
-                transform: rotate(90deg);
-            }
-
-            /* Overlay behind the drawer */
-            .nav-overlay {
-                display: block;
-                position: fixed;
-                inset: 0;
-                background: rgba(0,0,0,0.55);
-                z-index: 1040;
-                opacity: 0;
-                pointer-events: none;
-                transition: opacity 0.3s ease;
-            }
-            .nav-overlay.active {
-                opacity: 1;
-                pointer-events: all;
-            }
-
+            .nav-links.active { right: 0; }
             .nav-links a {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
                 opacity: 0;
                 transform: translateX(20px);
                 transition: all 0.3s ease;
             }
-            .nav-links.active a {
-                opacity: 1;
-                transform: translateX(0);
-            }
-            .nav-links a:nth-child(1) { transition-delay: 0.1s; }
-            .nav-links a:nth-child(2) { transition-delay: 0.15s; }
-            .nav-links a:nth-child(3) { transition-delay: 0.2s; }
-            .nav-links a:nth-child(4) { transition-delay: 0.25s; }
-        }
-
-        /* Hide close btn and overlay on desktop */
-        .nav-close-btn,
-        .nav-overlay {
-            display: none;
-        }
-
-        /* Ensure no element causes horizontal scroll */
-        img, iframe, video, canvas {
-            max-width: 100%;
-        }
-        
-        /* Projects container fix */
-        .projects-single {
-            width: 100%;
-        }
-        .project-card {
-            width: 100%;
-            overflow: hidden;
+            .nav-links.active a { opacity: 1; transform: translateX(0); }
         }
     </style>
 </head>
@@ -784,16 +594,12 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="nav-links" id="navLinks">
-            <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu">
-                <i class="fas fa-times"></i>
-            </button>
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Project</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
-    <div class="nav-overlay" id="navOverlay"></div>
 
     <section class="hero fade-up">
         <div class="hero-text">
@@ -867,7 +673,7 @@
         <h2 class="section-title">Let's <span>Connect</span></h2>
         <div class="contact-container">
             <a href="tel:9047854498" class="contact-card"><i class="fas fa-phone-alt"></i><span>+91 90478 54498</span></a>
-            <a href="/cdn-cgi/l/email-protection#4a382b202b392b243e22237a7d7a730a2d272b232664292527" class="contact-card"><i class="fas fa-envelope"></i><span>rajasanthi0709</span></a>
+            <a href="mailto:rajasanthi0709@gmail.com" class="contact-card"><i class="fas fa-envelope"></i><span>Email Me</span></a>
             <a href="https://github.com/abukutty" target="_blank" class="contact-card"><i class="fab fa-github"></i><span>GitHub</span></a>
         </div>
         <div style="text-align: center; margin-top: 1.5rem;">
@@ -877,21 +683,39 @@
 
     <footer>
         <p>© 2026 Raja S — Built with <i class="fas fa-heart" style="color:#38bdf8;"></i> HTML, CSS & JS | All Rights Reserved</p>
-        <p style="font-size: 0.7rem; margin-top: 5px;">Crafting modern web experiences</p>
     </footer>
 
     <div class="scroll-top" id="scrollTopBtn">
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script>
         (function() {
-            // Disable image interactions
-            const profileImg = document.getElementById('profileImg');
-            if(profileImg) {
-                profileImg.style.pointerEvents = 'none';
-                profileImg.addEventListener('click', (e) => { e.preventDefault(); return false; });
-                profileImg.addEventListener('contextmenu', (e) => { e.preventDefault(); return false; });
+            const hamburger = document.getElementById('hamburgerBtn');
+            const navLinks = document.getElementById('navLinks');
+            const body = document.body;
+
+            // Hamburger menu toggle
+            if(hamburger && navLinks) {
+                hamburger.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    body.classList.toggle('menu-open'); // FIX: Lock scroll
+                    const icon = hamburger.querySelector('i');
+                    if (navLinks.classList.contains('active')) {
+                        icon.classList.replace('fa-bars', 'fa-times');
+                    } else {
+                        icon.classList.replace('fa-times', 'fa-bars');
+                    }
+                });
+                
+                // Close menu when clicking a link
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        body.classList.remove('menu-open');
+                        hamburger.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                    });
+                });
             }
 
             // Custom cursor (desktop only)
@@ -935,7 +759,6 @@
                     });
                 }
                 function drawParticles() {
-                    if(!ctx) return;
                     ctx.clearRect(0, 0, width, height);
                     particles.forEach(p => {
                         ctx.beginPath();
@@ -960,72 +783,34 @@
                 });
             }
 
-            // Hamburger menu
-            const hamburger = document.getElementById('hamburgerBtn');
-            const navLinks = document.getElementById('navLinks');
-            const navCloseBtn = document.getElementById('navCloseBtn');
-            const navOverlay = document.getElementById('navOverlay');
-
-            function openMenu() {
-                navLinks.classList.add('active');
-                if (navOverlay) navOverlay.classList.add('active');
-                document.body.classList.add('menu-open');
-            }
-            function closeMenu() {
-                navLinks.classList.remove('active');
-                if (navOverlay) navOverlay.classList.remove('active');
-                document.body.classList.remove('menu-open');
-            }
-
-            if (hamburger) hamburger.addEventListener('click', openMenu);
-            if (navCloseBtn) navCloseBtn.addEventListener('click', closeMenu);
-            if (navOverlay) navOverlay.addEventListener('click', closeMenu);
-
-            // Close menu when clicking a link
-            if (navLinks) {
-                navLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', closeMenu);
-                });
-            }
-
             // Smooth scroll
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
-                    const targetId = this.getAttribute('href');
-                    if(targetId === '#') return;
-                    const target = document.querySelector(targetId);
+                    const target = document.querySelector(this.getAttribute('href'));
                     if(target) {
                         e.preventDefault();
-                        const navHeight = document.querySelector('nav')?.offsetHeight || 70;
-                        const targetPos = target.getBoundingClientRect().top + window.scrollY;
-                        window.scrollTo({ top: targetPos - navHeight - 10, behavior: 'smooth' });
+                        window.scrollTo({ top: target.offsetTop - 80, behavior: 'smooth' });
                     }
                 });
             });
 
-            // Scroll animations
-            const fadeElements = document.querySelectorAll('.fade-up');
+            // Fade animation observer
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if(entry.isIntersecting) {
                         entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.2 });
-            fadeElements.forEach(el => observer.observe(el));
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
 
-            // Scroll to top
+            // Scroll Top
             const scrollBtn = document.getElementById('scrollTopBtn');
-            if(scrollBtn) {
-                window.addEventListener('scroll', () => {
-                    if(window.scrollY > 300) scrollBtn.classList.add('show');
-                    else scrollBtn.classList.remove('show');
-                });
-                scrollBtn.addEventListener('click', () => {
-                    window.scrollTo({ top: 0, behavior: 'smooth' });
-                });
-            }
+            window.addEventListener('scroll', () => {
+                if(window.scrollY > 300) scrollBtn.classList.add('show');
+                else scrollBtn.classList.remove('show');
+            });
+            scrollBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
             // Ripple effect
             const btns = document.querySelectorAll('.btn-primary, .btn-outline, .view-project-btn');
@@ -1042,5 +827,7 @@
                     setTimeout(() => ripple.remove(), 600);
                 });
             });
-</script>
-           
+        })();
+    </script>
+</body>
+</html>
