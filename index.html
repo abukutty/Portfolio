@@ -658,6 +658,11 @@
                 overflow-x: hidden !important;
                 width: 100% !important;
             }
+
+            /* Lock scroll when menu is open */
+            body.menu-open {
+                overflow: hidden !important;
+            }
             
             /* Navbar mobile */
             nav {
@@ -665,28 +670,72 @@
             }
             .hamburger {
                 display: block;
+                z-index: 1100;
+                position: relative;
             }
             .nav-links {
                 position: fixed;
                 top: 0;
                 right: -100%;
-                width: 70%;
-                max-width: 260px;
+                width: 75%;
+                max-width: 280px;
                 height: 100vh;
                 background: rgba(2, 6, 23, 0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
                 align-items: center;
+                padding-top: 5rem;
                 gap: 2rem;
                 transition: right 0.3s ease;
-                z-index: 1000;
+                z-index: 1050;
                 box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
                 border-left: 1px solid rgba(56, 189, 248, 0.4);
             }
             .nav-links.active {
                 right: 0;
             }
+
+            /* Close (X) button inside the drawer */
+            .nav-close-btn {
+                display: flex;
+                position: absolute;
+                top: 1.1rem;
+                right: 1.2rem;
+                background: rgba(56, 189, 248, 0.12);
+                border: 1px solid rgba(56, 189, 248, 0.4);
+                color: #38bdf8;
+                font-size: 1.4rem;
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                align-items: center;
+                justify-content: center;
+                cursor: pointer;
+                transition: background 0.3s ease, transform 0.3s ease;
+                z-index: 1060;
+            }
+            .nav-close-btn:hover {
+                background: rgba(56, 189, 248, 0.25);
+                transform: rotate(90deg);
+            }
+
+            /* Overlay behind the drawer */
+            .nav-overlay {
+                display: block;
+                position: fixed;
+                inset: 0;
+                background: rgba(0,0,0,0.55);
+                z-index: 1040;
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.3s ease;
+            }
+            .nav-overlay.active {
+                opacity: 1;
+                pointer-events: all;
+            }
+
             .nav-links a {
                 font-size: 1.2rem;
                 opacity: 0;
@@ -701,6 +750,12 @@
             .nav-links a:nth-child(2) { transition-delay: 0.15s; }
             .nav-links a:nth-child(3) { transition-delay: 0.2s; }
             .nav-links a:nth-child(4) { transition-delay: 0.25s; }
+        }
+
+        /* Hide close btn and overlay on desktop */
+        .nav-close-btn,
+        .nav-overlay {
+            display: none;
         }
 
         /* Ensure no element causes horizontal scroll */
@@ -729,12 +784,16 @@
             <i class="fas fa-bars"></i>
         </button>
         <div class="nav-links" id="navLinks">
+            <button class="nav-close-btn" id="navCloseBtn" aria-label="Close menu">
+                <i class="fas fa-times"></i>
+            </button>
             <a href="#about">About</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Project</a>
             <a href="#contact">Contact</a>
         </div>
     </nav>
+    <div class="nav-overlay" id="navOverlay"></div>
 
     <section class="hero fade-up">
         <div class="hero-text">
@@ -808,7 +867,7 @@
         <h2 class="section-title">Let's <span>Connect</span></h2>
         <div class="contact-container">
             <a href="tel:9047854498" class="contact-card"><i class="fas fa-phone-alt"></i><span>+91 90478 54498</span></a>
-            <a href="mailto:rajasanthi0709@gmail.com" class="contact-card"><i class="fas fa-envelope"></i><span>rajasanthi0709</span></a>
+            <a href="/cdn-cgi/l/email-protection#4a382b202b392b243e22237a7d7a730a2d272b232664292527" class="contact-card"><i class="fas fa-envelope"></i><span>rajasanthi0709</span></a>
             <a href="https://github.com/abukutty" target="_blank" class="contact-card"><i class="fab fa-github"></i><span>GitHub</span></a>
         </div>
         <div style="text-align: center; margin-top: 1.5rem;">
@@ -825,7 +884,7 @@
         <i class="fas fa-arrow-up"></i>
     </div>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         (function() {
             // Disable image interactions
             const profileImg = document.getElementById('profileImg');
@@ -904,28 +963,28 @@
             // Hamburger menu
             const hamburger = document.getElementById('hamburgerBtn');
             const navLinks = document.getElementById('navLinks');
-            if(hamburger && navLinks) {
-                function toggleMenu() {
-                    navLinks.classList.toggle('active');
-                    const icon = hamburger.querySelector('i');
-                    if (navLinks.classList.contains('active')) {
-                        icon.classList.remove('fa-bars');
-                        icon.classList.add('fa-times');
-                    } else {
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    }
-                }
-                hamburger.addEventListener('click', toggleMenu);
-                
-                // Close menu when clicking a link
+            const navCloseBtn = document.getElementById('navCloseBtn');
+            const navOverlay = document.getElementById('navOverlay');
+
+            function openMenu() {
+                navLinks.classList.add('active');
+                if (navOverlay) navOverlay.classList.add('active');
+                document.body.classList.add('menu-open');
+            }
+            function closeMenu() {
+                navLinks.classList.remove('active');
+                if (navOverlay) navOverlay.classList.remove('active');
+                document.body.classList.remove('menu-open');
+            }
+
+            if (hamburger) hamburger.addEventListener('click', openMenu);
+            if (navCloseBtn) navCloseBtn.addEventListener('click', closeMenu);
+            if (navOverlay) navOverlay.addEventListener('click', closeMenu);
+
+            // Close menu when clicking a link
+            if (navLinks) {
                 navLinks.querySelectorAll('a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navLinks.classList.remove('active');
-                        const icon = hamburger.querySelector('i');
-                        icon.classList.remove('fa-times');
-                        icon.classList.add('fa-bars');
-                    });
+                    link.addEventListener('click', closeMenu);
                 });
             }
 
@@ -983,16 +1042,5 @@
                     setTimeout(() => ripple.remove(), 600);
                 });
             });
-
-            // Initial visible check
-            setTimeout(() => {
-                fadeElements.forEach(el => {
-                    if(el.getBoundingClientRect().top < window.innerHeight - 100) {
-                        el.classList.add('visible');
-                    }
-                });
-            }, 100);
-        })();
-    </script>
-</body>
-</html>
+</script>
+           
