@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
     <title>Raja S | Web Developer Portfolio</title>
     <!-- Google Fonts + Font Awesome Icons -->
     <link
@@ -10,10 +10,18 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        /* RESET - NO MARGINS, NO PADDINGS CAUSING ISSUES */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+        }
+
+        html, body {
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden !important;
+            position: relative;
         }
 
         body {
@@ -22,35 +30,41 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             scroll-behavior: smooth;
-            overflow-x: hidden;
+            overflow-x: hidden !important;
             position: relative;
             width: 100%;
-            max-width: 100%;
         }
 
-        /* Custom Cursor - hidden on mobile for better touch experience */
+        /* Hide custom cursor on mobile */
         .cursor, .cursor-trail {
-            width: 20px;
-            height: 20px;
-            background: rgba(56, 189, 248, 0.6);
-            border-radius: 50%;
-            position: fixed;
-            pointer-events: none;
-            z-index: 9999;
-            transition: transform 0.1s ease;
-            transform: translate(-50%, -50%);
-            backdrop-filter: blur(2px);
-            box-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
+            display: none;
         }
-        .cursor-trail {
-            width: 8px;
-            height: 8px;
-            background: rgba(168, 85, 247, 0.5);
-            z-index: 9998;
-            filter: blur(2px);
-        }
-        @media (max-width: 768px) {
-            .cursor, .cursor-trail { display: none; }
+        
+        @media (min-width: 769px) {
+            .cursor {
+                display: block;
+                width: 20px;
+                height: 20px;
+                background: rgba(56, 189, 248, 0.6);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9999;
+                transform: translate(-50%, -50%);
+                backdrop-filter: blur(2px);
+                box-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
+            }
+            .cursor-trail {
+                display: block;
+                width: 8px;
+                height: 8px;
+                background: rgba(168, 85, 247, 0.5);
+                border-radius: 50%;
+                position: fixed;
+                pointer-events: none;
+                z-index: 9998;
+                filter: blur(2px);
+            }
         }
 
         /* Particles Canvas */
@@ -62,10 +76,10 @@
             height: 100%;
             pointer-events: none;
             z-index: -1;
-            opacity: 0.5;
+            opacity: 0.4;
         }
 
-        /* Background gradient */
+        /* Background */
         body::before {
             content: '';
             position: fixed;
@@ -73,23 +87,30 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.12) 0%, rgba(10, 12, 21, 0) 70%),
-                        radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.1) 0%, rgba(10, 12, 21, 0) 70%);
+            background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.1) 0%, rgba(10, 12, 21, 0) 70%),
+                        radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.08) 0%, rgba(10, 12, 21, 0) 70%);
             pointer-events: none;
             z-index: -1;
         }
 
         /* Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0f172a; }
-        ::-webkit-scrollbar-thumb { background: linear-gradient(135deg, #38bdf8, #818cf8); border-radius: 10px; }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            border-radius: 10px;
+        }
 
-        /* Navbar */
+        /* ========== NAVBAR ========== */
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1rem 2rem;
+            padding: 1rem 1.5rem;
             background: rgba(2, 6, 23, 0.85);
             backdrop-filter: blur(20px);
             position: sticky;
@@ -97,7 +118,6 @@
             z-index: 1000;
             border-bottom: 1px solid rgba(56, 189, 248, 0.3);
             width: 100%;
-            max-width: 100%;
         }
         .logo {
             font-size: 1.6rem;
@@ -117,39 +137,60 @@
             font-weight: 600;
             transition: 0.3s ease;
             font-size: 1rem;
-            position: relative;
         }
-        .nav-links a:hover { color: #38bdf8; }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0%;
-            height: 2px;
-            background: linear-gradient(90deg, #38bdf8, #a78bfa);
-            transition: 0.3s;
+        .nav-links a:hover {
+            color: #38bdf8;
         }
-        .nav-links a:hover::after { width: 100%; }
         .hamburger {
             display: none;
-            font-size: 1.8rem;
-            cursor: pointer;
             background: transparent;
             border: none;
             color: #38bdf8;
+            font-size: 1.8rem;
+            cursor: pointer;
         }
 
-        /* Hero Section - IMPROVED MOBILE LAYOUT */
+        /* ========== HERO SECTION - CLEAN MOBILE ========== */
         .hero {
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            padding: 4rem 2rem;
+            justify-content: center;
+            padding: 3rem 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
             gap: 3rem;
             width: 100%;
+        }
+        /* Desktop: image on right, text on left */
+        @media (min-width: 769px) {
+            .hero {
+                flex-direction: row;
+                text-align: left;
+            }
+            .hero-text {
+                text-align: left;
+            }
+            .btn-group {
+                justify-content: flex-start;
+            }
+        }
+        /* Mobile: stack vertically, center everything */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                padding: 2rem 1rem;
+                gap: 2rem;
+            }
+            .hero-text {
+                text-align: center;
+                order: 1;
+            }
+            .hero-image {
+                order: 2;
+            }
+            .btn-group {
+                justify-content: center;
+            }
         }
         .hero-text {
             flex: 1;
@@ -189,7 +230,6 @@
         .hero-desc {
             color: #94a3b8;
             margin: 1rem 0 2rem;
-            font-size: 1rem;
         }
         .btn-group {
             display: flex;
@@ -205,29 +245,18 @@
             align-items: center;
             gap: 10px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
         .btn-primary {
             background: linear-gradient(135deg, #38bdf8, #3b82f6);
             color: #0f172a;
             box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
         }
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.6);
-        }
         .btn-outline {
             background: transparent;
             border: 1.5px solid #38bdf8;
             color: #38bdf8;
         }
-        .btn-outline:hover {
-            background: rgba(56, 189, 248, 0.15);
-            transform: translateY(-3px);
-        }
-        
-        /* Image Container - PERFECT CENTERING ON ALL DEVICES */
+        /* Image - PERFECTLY CENTERED ON ALL DEVICES */
         .hero-image {
             flex: 0.8;
             display: flex;
@@ -241,10 +270,11 @@
             box-shadow: 0 30px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(56, 189, 248, 0.4);
             animation: floatGlow 4s ease-in-out infinite;
             pointer-events: none;
+            display: inline-block;
         }
         @keyframes floatGlow {
             0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); box-shadow: 0 40px 50px -15px rgba(56,189,248,0.3), 0 0 0 5px rgba(56,189,248,0.6); }
+            50% { transform: translateY(-8px); }
         }
         .hero-image img {
             width: 260px;
@@ -256,13 +286,37 @@
             user-select: none;
             -webkit-user-drag: none;
         }
+        /* Mobile image size */
+        @media (max-width: 768px) {
+            .hero-image img {
+                width: 180px;
+                height: 180px;
+            }
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+        }
+        @media (max-width: 480px) {
+            .hero-image img {
+                width: 150px;
+                height: 150px;
+            }
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+        }
 
-        /* Sections */
+        /* ========== SECTIONS - NO OVERFLOW ========== */
         section {
-            padding: 5rem 2rem;
+            padding: 4rem 1.5rem;
             max-width: 1200px;
             margin: 0 auto;
             width: 100%;
+        }
+        @media (max-width: 768px) {
+            section {
+                padding: 3rem 1rem;
+            }
         }
         .section-title {
             text-align: center;
@@ -285,105 +339,121 @@
             margin: 1rem auto 0;
             border-radius: 4px;
         }
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
+        }
+
+        /* About Card */
         .about-card, .project-card {
             background: rgba(30, 41, 59, 0.4);
             backdrop-filter: blur(16px);
             border-radius: 2rem;
-            padding: 2.5rem;
+            padding: 2rem;
             border: 1px solid rgba(56, 189, 248, 0.3);
             transition: all 0.3s ease;
         }
-        .about-card:hover, .project-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(56, 189, 248, 0.6);
-            background: rgba(30, 41, 59, 0.6);
+        @media (max-width: 768px) {
+            .about-card, .project-card {
+                padding: 1.5rem;
+            }
         }
+
+        /* Skills */
         .skills-grid {
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 1.5rem;
+            gap: 1rem;
         }
         .skill-item {
             background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.7));
             border: 1px solid rgba(56, 189, 248, 0.3);
-            padding: 1rem 2rem;
+            padding: 0.8rem 1.8rem;
             border-radius: 80px;
             font-weight: 700;
-            font-size: 1.1rem;
+            font-size: 1rem;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 10px;
             transition: all 0.3s ease;
         }
-        .skill-item:hover {
-            transform: translateY(-5px);
-            border-color: #38bdf8;
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
+        @media (max-width: 480px) {
+            .skill-item {
+                padding: 0.6rem 1.2rem;
+                font-size: 0.9rem;
+            }
         }
+
+        /* Tech Tags */
         .tech-tag {
             display: inline-block;
             background: rgba(15, 23, 42, 0.9);
-            padding: 0.35rem 1.2rem;
+            padding: 0.3rem 1rem;
             border-radius: 30px;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            margin: 0 0.4rem 0.8rem;
+            margin: 0 0.3rem 0.6rem;
             color: #90cdf4;
             border: 1px solid rgba(56, 189, 248, 0.3);
         }
+
+        /* Project Button */
         .view-project-btn {
             background: linear-gradient(135deg, #38bdf8, #3b82f6);
             color: #0f172a;
-            padding: 0.7rem 1.8rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            padding: 0.7rem 1.5rem;
             margin-top: 1rem;
+            display: inline-flex;
         }
-        .view-project-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
-        }
+
+        /* Contact */
         .contact-container {
             display: flex;
             justify-content: center;
-            gap: 1.5rem;
+            gap: 1rem;
             flex-wrap: wrap;
         }
         .contact-card {
             background: linear-gradient(135deg, #111827, #0f172a);
-            padding: 0.8rem 1.8rem;
+            padding: 0.7rem 1.5rem;
             border-radius: 60px;
             display: flex;
             align-items: center;
-            gap: 0.8rem;
+            gap: 0.7rem;
             transition: all 0.3s ease;
             border: 1px solid rgba(56, 189, 248, 0.3);
             text-decoration: none;
             color: #eef2ff;
             font-weight: 600;
+            font-size: 0.9rem;
         }
-        .contact-card:hover {
-            transform: translateY(-5px);
-            border-color: #38bdf8;
-            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.2);
-        }
-        footer {
-            text-align: center;
-            padding: 2rem;
-            background: linear-gradient(180deg, #020617, #03071a);
-            border-top: 1px solid rgba(56, 189, 248, 0.2);
+        @media (max-width: 600px) {
+            .contact-card {
+                padding: 0.6rem 1rem;
+                font-size: 0.8rem;
+            }
+            .contact-card i {
+                font-size: 0.9rem;
+            }
         }
 
-        /* Scroll Top Button */
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: linear-gradient(180deg, #020617, #03071a);
+            border-top: 1px solid rgba(56, 189, 248, 0.2);
+            width: 100%;
+        }
+
+        /* Scroll Top */
         .scroll-top {
             position: fixed;
-            bottom: 25px;
-            right: 25px;
+            bottom: 20px;
+            right: 20px;
             width: 45px;
             height: 45px;
             background: linear-gradient(135deg, #38bdf8, #818cf8);
@@ -407,18 +477,23 @@
             font-size: 1.3rem;
         }
 
-        /* Fade Up Animation */
+        /* Animations */
         .fade-up {
             opacity: 0;
-            transform: translateY(40px);
-            transition: all 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            transform: translateY(30px);
+            transition: all 0.6s ease;
         }
         .fade-up.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        /* Ripple Effect */
+        /* Disable modal */
+        .image-modal {
+            display: none !important;
+        }
+
+        /* Ripple */
         .ripple {
             position: absolute;
             border-radius: 50%;
@@ -435,18 +510,17 @@
             overflow: hidden;
         }
 
-        /* ============================================ */
-        /* MOBILE RESPONSIVENESS - COMPLETE FIXES */
-        /* ============================================ */
-        @media (max-width: 992px) {
-            .hero h1 { font-size: 3rem; }
-            .hero-image img { width: 230px; height: 230px; }
-        }
-
+        /* CRITICAL FIXES FOR MOBILE - NO EXTRA SPACE */
         @media (max-width: 768px) {
-            /* Navbar */
+            /* Remove any possible margin/padding that creates white space */
+            body, html {
+                overflow-x: hidden !important;
+                width: 100% !important;
+            }
+            
+            /* Navbar mobile */
             nav {
-                padding: 0.8rem 1.2rem;
+                padding: 0.8rem 1rem;
             }
             .hamburger {
                 display: block;
@@ -486,157 +560,20 @@
             .nav-links a:nth-child(2) { transition-delay: 0.15s; }
             .nav-links a:nth-child(3) { transition-delay: 0.2s; }
             .nav-links a:nth-child(4) { transition-delay: 0.25s; }
-
-            /* Hero Section - FIXED MOBILE LAYOUT */
-            .hero {
-                flex-direction: column;
-                padding: 2rem 1.2rem 3rem;
-                text-align: center;
-                gap: 2rem;
-            }
-            .hero-text {
-                order: 1;
-                width: 100%;
-            }
-            .hero h1 {
-                font-size: 2.2rem;
-            }
-            .hero-desc {
-                font-size: 0.95rem;
-                padding: 0 0.5rem;
-            }
-            .btn-group {
-                justify-content: center;
-            }
-            .btn-primary, .btn-outline {
-                padding: 0.7rem 1.5rem;
-                font-size: 0.9rem;
-            }
-            
-            /* IMAGE - PERFECTLY CENTERED ON MOBILE */
-            .hero-image {
-                order: 2;
-                width: 100%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                margin: 0 auto;
-            }
-            .img-wrapper {
-                display: inline-flex;
-                justify-content: center;
-                align-items: center;
-                margin: 0 auto;
-                padding: 6px;
-            }
-            .hero-image img {
-                width: 180px;
-                height: 180px;
-            }
-
-            /* Sections padding */
-            section {
-                padding: 3rem 1.2rem;
-            }
-            .section-title {
-                font-size: 2rem;
-                margin-bottom: 2rem;
-            }
-            .about-card, .project-card {
-                padding: 1.5rem;
-            }
-            .about-card p {
-                font-size: 0.95rem;
-            }
-            .skills-grid {
-                gap: 1rem;
-            }
-            .skill-item {
-                padding: 0.7rem 1.3rem;
-                font-size: 0.95rem;
-            }
-            .skill-item i {
-                font-size: 1.1rem;
-            }
-            .tech-tag {
-                font-size: 0.7rem;
-                padding: 0.25rem 1rem;
-            }
-            .contact-container {
-                gap: 0.8rem;
-            }
-            .contact-card {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.85rem;
-            }
-            .contact-card i {
-                font-size: 1rem;
-            }
-            .view-project-btn {
-                padding: 0.6rem 1.5rem;
-                font-size: 0.9rem;
-            }
-            footer {
-                padding: 1.5rem;
-                font-size: 0.85rem;
-            }
         }
 
-        /* Extra small devices (phones under 480px) */
-        @media (max-width: 480px) {
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            .badge {
-                font-size: 0.7rem;
-                padding: 0.3rem 1rem;
-            }
-            .hero-image img {
-                width: 150px;
-                height: 150px;
-            }
-            .img-wrapper {
-                padding: 5px;
-            }
-            .btn-primary, .btn-outline {
-                padding: 0.6rem 1.2rem;
-                font-size: 0.85rem;
-            }
-            .section-title {
-                font-size: 1.8rem;
-            }
-            .section-title::after {
-                width: 50px;
-            }
-            .skill-item {
-                padding: 0.5rem 1rem;
-                font-size: 0.85rem;
-            }
-            .contact-card span {
-                font-size: 0.75rem;
-            }
-            .contact-card {
-                padding: 0.5rem 1rem;
-            }
+        /* Ensure no element causes horizontal scroll */
+        img, iframe, video, canvas {
+            max-width: 100%;
         }
-
-        /* Prevent any horizontal overflow */
+        
+        /* Projects container fix */
         .projects-single {
             width: 100%;
         }
         .project-card {
             width: 100%;
-            max-width: 100%;
-            overflow-x: hidden;
-        }
-        img {
-            max-width: 100%;
-            height: auto;
-        }
-        
-        /* Disable any image modal/popup */
-        .image-modal {
-            display: none !important;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -664,7 +601,7 @@
                 <i class="fas fa-code"></i> Web Developer
             </div>
             <h1>Hi, I'm <span class="gradient-text">Raja S</span></h1>
-            <p style="font-size: 1.1rem; color: #cbd5e6;">B.Sc Computer Science Student & Frontend Developer</p>
+            <p style="font-size: 1rem; color: #cbd5e6;">B.Sc Computer Science Student & Frontend Developer</p>
             <div class="hero-desc">
                 I build modern, responsive business websites using core web technologies. Passionate about clean design
                 and smooth user experiences.
@@ -702,14 +639,14 @@
             <div class="skill-item"><i class="fab fa-css3-alt"></i> CSS3</div>
             <div class="skill-item"><i class="fab fa-js"></i> JavaScript</div>
         </div>
-        <p style="text-align: center; margin-top: 2rem; color: #94a3b8;">Building responsive, accessible and interactive web experiences</p>
+        <p style="text-align: center; margin-top: 1.5rem; color: #94a3b8;">Building responsive, accessible and interactive web experiences</p>
     </section>
 
     <section id="projects" class="fade-up">
         <h2 class="section-title">Featured <span>Project</span></h2>
         <div class="projects-single" style="display: flex; justify-content: center;">
             <div class="project-card">
-                <div class="project-icon" style="font-size: 2.5rem; margin-bottom: 1rem;"><i class="fas fa-paint-roller"></i></div>
+                <div style="font-size: 2rem; margin-bottom: 0.8rem;"><i class="fas fa-paint-roller"></i></div>
                 <h3 style="margin-bottom: 0.8rem;">Paint Shop Website</h3>
                 <p style="margin-bottom: 1rem;">A complete business website for a professional paint shop. Modern UI with product showcase,
                     color swatches, smooth navigation, and fully responsive layout.</p>
@@ -733,14 +670,14 @@
             <a href="mailto:rajasanthi0709@gmail.com" class="contact-card"><i class="fas fa-envelope"></i><span>rajasanthi0709</span></a>
             <a href="https://github.com/abukutty" target="_blank" class="contact-card"><i class="fab fa-github"></i><span>GitHub</span></a>
         </div>
-        <div style="text-align: center; margin-top: 2rem;">
+        <div style="text-align: center; margin-top: 1.5rem;">
             <p style="color:#94a3b8;">✨ Open for freelance projects & collaborations ✨</p>
         </div>
     </section>
 
     <footer>
         <p>© 2026 Raja S — Built with <i class="fas fa-heart" style="color:#38bdf8;"></i> HTML, CSS & JS | All Rights Reserved</p>
-        <p style="font-size: 0.75rem; margin-top: 6px;">Crafting modern web experiences</p>
+        <p style="font-size: 0.7rem; margin-top: 5px;">Crafting modern web experiences</p>
     </footer>
 
     <div class="scroll-top" id="scrollTopBtn">
@@ -749,7 +686,7 @@
 
     <script>
         (function() {
-            // Disable any image click interactions completely
+            // Disable image interactions
             const profileImg = document.getElementById('profileImg');
             if(profileImg) {
                 profileImg.style.pointerEvents = 'none';
@@ -757,26 +694,28 @@
                 profileImg.addEventListener('contextmenu', (e) => { e.preventDefault(); return false; });
             }
 
-            // Custom cursor (only on desktop)
-            const cursor = document.querySelector('.cursor');
-            const trail = document.querySelector('.cursor-trail');
-            let mouseX = 0, mouseY = 0, trailX = 0, trailY = 0;
-            if(cursor && trail && window.innerWidth > 768) {
-                document.addEventListener('mousemove', (e) => {
-                    mouseX = e.clientX;
-                    mouseY = e.clientY;
-                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-                });
-                function animateTrail() {
-                    trailX += (mouseX - trailX) * 0.2;
-                    trailY += (mouseY - trailY) * 0.2;
-                    trail.style.transform = `translate(${trailX}px, ${trailY}px)`;
-                    requestAnimationFrame(animateTrail);
+            // Custom cursor (desktop only)
+            if(window.innerWidth > 768) {
+                const cursor = document.querySelector('.cursor');
+                const trail = document.querySelector('.cursor-trail');
+                if(cursor && trail) {
+                    let mouseX = 0, mouseY = 0, trailX = 0, trailY = 0;
+                    document.addEventListener('mousemove', (e) => {
+                        mouseX = e.clientX;
+                        mouseY = e.clientY;
+                        cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
+                    });
+                    function animateTrail() {
+                        trailX += (mouseX - trailX) * 0.2;
+                        trailY += (mouseY - trailY) * 0.2;
+                        trail.style.transform = `translate(${trailX}px, ${trailY}px)`;
+                        requestAnimationFrame(animateTrail);
+                    }
+                    animateTrail();
                 }
-                animateTrail();
             }
 
-            // Particles background
+            // Particles
             const canvas = document.getElementById('particles-canvas');
             if(canvas) {
                 const ctx = canvas.getContext('2d');
@@ -785,14 +724,14 @@
                 canvas.width = width;
                 canvas.height = height;
                 let particles = [];
-                for (let i = 0; i < 60; i++) {
+                for (let i = 0; i < 50; i++) {
                     particles.push({
                         x: Math.random() * width,
                         y: Math.random() * height,
                         radius: Math.random() * 2 + 1,
                         alpha: Math.random() * 0.4,
-                        speedX: (Math.random() - 0.5) * 0.3,
-                        speedY: (Math.random() - 0.5) * 0.3,
+                        speedX: (Math.random() - 0.5) * 0.2,
+                        speedY: (Math.random() - 0.5) * 0.2,
                     });
                 }
                 function drawParticles() {
@@ -837,6 +776,7 @@
                     }
                 }
                 hamburger.addEventListener('click', toggleMenu);
+                
                 // Close menu when clicking a link
                 navLinks.querySelectorAll('a').forEach(link => {
                     link.addEventListener('click', () => {
@@ -875,7 +815,7 @@
             }, { threshold: 0.2 });
             fadeElements.forEach(el => observer.observe(el));
 
-            // Scroll to top button
+            // Scroll to top
             const scrollBtn = document.getElementById('scrollTopBtn');
             if(scrollBtn) {
                 window.addEventListener('scroll', () => {
@@ -903,7 +843,7 @@
                 });
             });
 
-            // Trigger initial visible elements
+            // Initial visible check
             setTimeout(() => {
                 fadeElements.forEach(el => {
                     if(el.getBoundingClientRect().top < window.innerHeight - 100) {
