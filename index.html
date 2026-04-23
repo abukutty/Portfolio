@@ -1,912 +1,1979 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=yes">
-    <title>Raja S | Web Developer Portfolio</title>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        /* RESET - NO MARGINS, NO PADDINGS CAUSING ISSUES */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="description"
+    content="Raja S - Frontend Developer specializing in modern, responsive websites for businesses. Explore projects, skills, and services.">
+  <meta name="author" content="Raja S">
+  <title>Raja S | Frontend Developer | Video Loop Showcase</title>
+  <!-- Google Fonts: Inter -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap"
+    rel="stylesheet">
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- AOS Scroll Reveal Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* ========== RESET & BASE ========== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-        html, body {
-            width: 100%;
-            max-width: 100%;
-            overflow-x: hidden !important;
-            position: relative;
-        }
+    html {
+      scroll-behavior: smooth;
+    }
 
-        body {
-            background: #0a0c15;
-            color: #eef2ff;
-            font-family: 'Inter', sans-serif;
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            overflow-x: hidden !important;
-            position: relative;
-            width: 100%;
-        }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #020617 0%, #0f172a 50%, #020617 100%);
+      color: #ffffff;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
 
-        /* FIX: Prevent background scroll when mobile menu is open */
-        body.menu-open {
-            overflow: hidden !important;
-        }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
 
-        /* Hide custom cursor on mobile */
-        .cursor, .cursor-trail {
-            display: none;
-        }
-        
-        @media (min-width: 769px) {
-            .cursor {
-                display: block;
-                width: 20px;
-                height: 20px;
-                background: rgba(56, 189, 248, 0.6);
-                border-radius: 50%;
-                position: fixed;
-                pointer-events: none;
-                z-index: 9999;
-                transform: translate(-50%, -50%);
-                backdrop-filter: blur(2px);
-                box-shadow: 0 0 15px rgba(56, 189, 248, 0.8);
-            }
-            .cursor-trail {
-                display: block;
-                width: 8px;
-                height: 8px;
-                background: rgba(168, 85, 247, 0.5);
-                border-radius: 50%;
-                position: fixed;
-                pointer-events: none;
-                z-index: 9998;
-                filter: blur(2px);
-            }
-        }
+    section {
+      padding: 5rem 0;
+    }
 
-        /* Particles Canvas */
-        #particles-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            opacity: 0.4;
-        }
+    /* ========== TYPOGRAPHY ========== */
+    h1,
+    h2,
+    h3,
+    h4 {
+      font-weight: 700;
+      line-height: 1.2;
+      color: #ffffff;
+    }
 
-        /* Background */
-        body::before {
-            content: '';
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.1) 0%, rgba(10, 12, 21, 0) 70%),
-                        radial-gradient(circle at 80% 70%, rgba(168, 85, 247, 0.08) 0%, rgba(10, 12, 21, 0) 70%);
-            pointer-events: none;
-            z-index: -1;
-        }
+    .accent {
+      color: #38bdf8;
+    }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #0f172a;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: linear-gradient(135deg, #38bdf8, #818cf8);
-            border-radius: 10px;
-        }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
 
-        /* ========== NAVBAR ========== */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 1.5rem;
-            background: rgba(2, 6, 23, 0.85);
-            backdrop-filter: blur(20px);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 1px solid rgba(56, 189, 248, 0.3);
-            width: 100%;
-        }
-        .logo {
-            font-size: 1.6rem;
-            font-weight: 800;
-            background: linear-gradient(135deg, #38bdf8, #c084fc, #a78bfa);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            transition: filter 0.3s ease, transform 0.3s ease;
-            cursor: default;
-        }
-        .logo:hover {
-            filter: drop-shadow(0 0 12px rgba(56, 189, 248, 0.7));
-            transform: scale(1.05);
-        }
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-        }
-        .nav-links a {
-            color: #cbd5e6;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s ease;
-            font-size: 1rem;
-            position: relative;
-        }
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #38bdf8, #a78bfa);
-            border-radius: 2px;
-            transition: width 0.3s ease;
-        }
-        .nav-links a:hover {
-            color: #38bdf8;
-        }
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-        .hamburger {
-            display: none;
-            background: transparent;
-            border: none;
-            color: #38bdf8;
-            font-size: 1.8rem;
-            cursor: pointer;
-            transition: color 0.3s ease, transform 0.3s ease;
-            z-index: 1100; /* FIX: Keep hamburger above mobile menu overlay */
-        }
-        .hamburger:hover {
-            color: #c084fc;
-        }
+    .section-tag {
+      display: inline-block;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #38bdf8;
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.3rem 1rem;
+      border-radius: 40px;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
 
-        /* ========== HERO SECTION ========== */
-        .hero {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 3rem 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            gap: 3rem;
-            width: 100%;
-        }
-        @media (min-width: 769px) {
-            .hero {
-                flex-direction: row;
-                text-align: left;
-            }
-            .hero-text {
-                text-align: left;
-            }
-            .btn-group {
-                justify-content: flex-start;
-            }
-        }
-        @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                padding: 2rem 1rem;
-                gap: 2rem;
-            }
-            .hero-text {
-                text-align: center;
-                order: 1;
-            }
-            .hero-image {
-                order: 2;
-            }
-            .btn-group {
-                justify-content: center;
-            }
-        }
-        .hero-text {
-            flex: 1;
-        }
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(56, 189, 248, 0.15);
-            padding: 0.4rem 1.2rem;
-            border-radius: 40px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #7dd3fc;
-            margin-bottom: 1.5rem;
-            border: 1px solid rgba(56, 189, 248, 0.4);
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-        .badge:hover {
-            background: rgba(56, 189, 248, 0.28);
-            border-color: rgba(56, 189, 248, 0.75);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px rgba(56, 189, 248, 0.25);
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-            font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-            letter-spacing: -0.02em;
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #38bdf8, #c084fc, #a78bfa);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            background-size: 200% auto;
-            animation: gradientShift 4s ease infinite;
-        }
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-        .hero-desc {
-            color: #94a3b8;
-            margin: 1rem 0 2rem;
-        }
-        .btn-group {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .btn-primary, .btn-outline, .view-project-btn {
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-        }
-        .btn-primary {
-            background: linear-gradient(135deg, #38bdf8, #3b82f6);
-            color: #0f172a;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.4);
-        }
-        .btn-primary:hover {
-            background: linear-gradient(135deg, #7dd3fc, #60a5fa);
-            box-shadow: 0 8px 30px rgba(56, 189, 248, 0.65);
-            transform: translateY(-3px) scale(1.04);
-            color: #0f172a;
-        }
-        .btn-outline {
-            background: transparent;
-            border: 1.5px solid #38bdf8;
-            color: #38bdf8;
-        }
-        .btn-outline:hover {
-            background: rgba(56, 189, 248, 0.12);
-            border-color: #7dd3fc;
-            color: #7dd3fc;
-            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.3);
-            transform: translateY(-3px) scale(1.04);
-        }
-        .hero-image {
-            flex: 0.8;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .img-wrapper {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
-            border-radius: 50%;
-            padding: 8px;
-            box-shadow: 0 30px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(56, 189, 248, 0.4);
-            animation: floatGlow 4s ease-in-out infinite;
-            pointer-events: none;
-            display: inline-block;
-            transition: box-shadow 0.4s ease;
-        }
-        .img-wrapper:hover {
-            box-shadow: 0 30px 40px -15px rgba(0,0,0,0.5), 0 0 0 4px rgba(56,189,248,0.8), 0 0 40px rgba(56,189,248,0.35);
-        }
-        @keyframes floatGlow {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-8px); }
-        }
-        .hero-image img {
-            width: 260px;
-            height: 260px;
-            object-fit: cover;
-            border-radius: 50%;
-            display: block;
-            pointer-events: none;
-            user-select: none;
-            -webkit-user-drag: none;
-        }
-        @media (max-width: 768px) {
-            .hero-image img { width: 180px; height: 180px; }
-            .hero h1 { font-size: 2.2rem; }
-        }
-        @media (max-width: 480px) {
-            .hero-image img { width: 150px; height: 150px; }
-            .hero h1 { font-size: 1.8rem; }
-        }
+    .section-header h2 {
+      font-size: 2.2rem;
+      margin-top: 0.5rem;
+    }
 
-        /* ========== SECTIONS ========== */
-        section {
-            padding: 4rem 1.5rem;
-            max-width: 1200px;
-            margin: 0 auto;
-            width: 100%;
-        }
-        @media (max-width: 768px) {
-            section { padding: 3rem 1rem; }
-        }
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 3rem;
-        }
-        .section-title span {
-            background: linear-gradient(135deg, #38bdf8, #c084fc);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 70px;
-            height: 4px;
-            background: linear-gradient(90deg, #38bdf8, #a78bfa);
-            margin: 1rem auto 0;
-            border-radius: 4px;
-            transition: width 0.4s ease;
-        }
-        .section-title:hover::after { width: 120px; }
-        @media (max-width: 768px) {
-            .section-title { font-size: 2rem; margin-bottom: 2rem; }
-        }
+    @media (max-width: 768px) {
+      .section-header h2 {
+        font-size: 1.8rem;
+      }
 
-        .about-card, .project-card {
-            background: rgba(30, 41, 59, 0.4);
-            backdrop-filter: blur(16px);
-            border-radius: 2rem;
-            padding: 2rem;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            transition: all 0.3s ease;
-        }
-        .about-card:hover {
-            background: rgba(30, 41, 59, 0.6);
-            border-color: rgba(56, 189, 248, 0.6);
-            box-shadow: 0 20px 50px rgba(56, 189, 248, 0.12), 0 0 0 1px rgba(56, 189, 248, 0.2);
-            transform: translateY(-4px);
-        }
-        @media (max-width: 768px) {
-            .about-card, .project-card { padding: 1.5rem; }
-        }
+      section {
+        padding: 3rem 0;
+      }
 
-        .skills-grid {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .skill-item {
-            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.7));
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            padding: 0.8rem 1.8rem;
-            border-radius: 80px;
-            font-weight: 700;
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            cursor: default;
-        }
-        .skill-item:hover {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(30, 41, 59, 0.9));
-            border-color: rgba(56, 189, 248, 0.75);
-            box-shadow: 0 8px 25px rgba(56, 189, 248, 0.25);
-            transform: translateY(-4px) scale(1.05);
-            color: #e0f2fe;
-        }
-        .skill-item i { transition: filter 0.3s ease, transform 0.3s ease; }
-        .skill-item:hover i {
-            filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.8));
-            transform: rotate(-8deg);
-        }
+      .container {
+        padding: 0 1.5rem;
+      }
+    }
 
-        .tech-tag {
-            display: inline-block;
-            background: rgba(15, 23, 42, 0.9);
-            padding: 0.3rem 1rem;
-            border-radius: 30px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin: 0 0.3rem 0.6rem;
-            color: #90cdf4;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            transition: all 0.25s ease;
-            cursor: default;
-        }
-        .tech-tag:hover {
-            background: rgba(56, 189, 248, 0.15);
-            border-color: rgba(56, 189, 248, 0.65);
-            color: #e0f2fe;
-            transform: translateY(-2px);
-        }
+    /* ========== BUTTONS ========== */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.8rem 1.8rem;
+      border-radius: 40px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+    }
 
-        .view-project-btn {
-            background: linear-gradient(135deg, #38bdf8, #3b82f6);
-            color: #0f172a;
-            padding: 0.7rem 1.5rem;
-            margin-top: 1rem;
-            display: inline-flex;
-        }
-        .view-project-btn:hover {
-            background: linear-gradient(135deg, #7dd3fc, #60a5fa);
-            transform: translateY(-3px) scale(1.04);
-            color: #0f172a;
-        }
+    .btn-primary {
+      background: #38bdf8;
+      color: #020617;
+      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
+    }
 
-        .project-card:hover {
-            background: rgba(30, 41, 59, 0.65);
-            border-color: rgba(56, 189, 248, 0.6);
-            box-shadow: 0 25px 60px rgba(56, 189, 248, 0.15);
-            transform: translateY(-6px);
-        }
+    .btn-primary:hover {
+      background: #0ea5e9;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
+    }
 
-        .contact-container {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-        .contact-card {
-            background: linear-gradient(135deg, #111827, #0f172a);
-            padding: 0.7rem 1.5rem;
-            border-radius: 60px;
-            display: flex;
-            align-items: center;
-            gap: 0.7rem;
-            transition: all 0.3s ease;
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            text-decoration: none;
-            color: #eef2ff;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-        .contact-card:hover {
-            background: linear-gradient(135deg, rgba(56, 189, 248, 0.18), rgba(15, 23, 42, 0.95));
-            border-color: rgba(56, 189, 248, 0.7);
-            transform: translateY(-4px) scale(1.04);
-        }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #38bdf8;
+      color: #38bdf8;
+    }
 
-        footer {
-            text-align: center;
-            padding: 2rem 1rem;
-            background: linear-gradient(180deg, #020617, #03071a);
-            border-top: 1px solid rgba(56, 189, 248, 0.2);
-            width: 100%;
-        }
+    .btn-outline:hover {
+      background: rgba(56, 189, 248, 0.1);
+      transform: translateY(-3px);
+    }
 
-        .scroll-top {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #38bdf8, #818cf8);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 999;
-        }
-        .scroll-top.show { opacity: 1; visibility: visible; }
+    .full-width {
+      width: 100%;
+      justify-content: center;
+    }
 
-        .fade-up {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease;
-        }
-        .fade-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    /* ========== NAVBAR ========== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(2, 6, 23, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 1rem 0;
+      transition: all 0.3s;
+    }
 
-        .ripple {
-            position: absolute;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.5);
-            transform: scale(0);
-            animation: rippleAnim 0.6s linear;
-            pointer-events: none;
-        }
-        @keyframes rippleAnim { to { transform: scale(4); opacity: 0; } }
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-        /* CRITICAL FIXES FOR MOBILE */
-        @media (max-width: 768px) {
-            body, html { overflow-x: hidden !important; width: 100% !important; }
-            nav { padding: 0.8rem 1rem; }
-            .hamburger { display: block; }
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      color: white;
+      transition: transform 0.3s ease;
+    }
 
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 300px;
-                height: 100vh;
-                background: rgba(2, 6, 23, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: flex-start; /* FIX: Place options at the top side */
-                padding-top: 6rem; /* Space from top */
-                align-items: center;
-                gap: 2rem;
-                transition: right 0.3s ease;
-                z-index: 1050;
-                box-shadow: -5px 0 30px rgba(0, 0, 0, 0.5);
-                border-left: 1px solid rgba(56, 189, 248, 0.4);
-            }
-            .nav-links.active { right: 0; }
-            .nav-links a {
-                font-size: 1.4rem;
-                opacity: 0;
-                transform: translateX(20px);
-                transition: all 0.3s ease;
-            }
-            .nav-links.active a { opacity: 1; transform: translateX(0); }
-        }
-    </style>
+    .logo:hover {
+      transform: scale(1.02);
+    }
+
+    .logo .dot {
+      color: #38bdf8;
+    }
+
+    .nav-menu {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-link {
+      text-decoration: none;
+      color: #cbd5e1;
+      font-weight: 500;
+      transition: all 0.3s;
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #38bdf8;
+      transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after,
+    .nav-link.active::after {
+      width: 100%;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      color: #38bdf8;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      gap: 5px;
+    }
+
+    .hamburger span {
+      width: 25px;
+      height: 3px;
+      background: white;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      .hamburger {
+        display: flex;
+      }
+
+      .nav-menu {
+        position: fixed;
+        left: -100%;
+        top: 70px;
+        flex-direction: column;
+        background: #0f172a;
+        width: 100%;
+        text-align: center;
+        transition: 0.3s;
+        gap: 1.5rem;
+        padding: 2rem 0;
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid #38bdf8;
+      }
+
+      .nav-menu.active {
+        left: 0;
+      }
+
+      .nav-link {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* ========== HERO SECTION ========== */
+    .hero {
+      min-height: 90vh;
+      display: flex;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-badge {
+      background: rgba(56, 189, 248, 0.15);
+      display: inline-block;
+      padding: 0.4rem 1rem;
+      border-radius: 40px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: #38bdf8;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-title {
+      font-size: 3.2rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-desc {
+      font-size: 1.1rem;
+      color: #94a3b8;
+      margin-bottom: 2rem;
+      max-width: 90%;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ========== VIDEO SHOWCASE SPACE (CREATIVE SPACE) ========== */
+    .hero-video-space {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 320px;
+      perspective: 800px;
+    }
+
+    .video-carousel {
+      width: 100%;
+      max-width: 550px;
+      background: rgba(2, 6, 23, 0.65);
+      backdrop-filter: blur(8px);
+      border-radius: 32px;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(56, 189, 248, 0.2);
+      overflow: hidden;
+      transition: all 0.4s ease;
+      aspect-ratio: 4 / 3;
+    }
+
+    .video-carousel:hover {
+      transform: translateY(-8px) scale(1.01);
+      box-shadow: 0 30px 50px -15px rgba(56, 70, 110, 0.3);
+
+    }
+
+    .rotating-video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .video-carousel:hover .rotating-video {
+      transform: scale(1.02);
+    }
+
+    .video-caption {
+      position: absolute;
+      bottom: 12px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      background: rgba(2, 6, 23, 0.75);
+      backdrop-filter: blur(8px);
+      padding: 6px 12px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #38bdf8;
+      letter-spacing: 1px;
+      border-radius: 30px;
+      width: fit-content;
+      margin: 0 auto;
+      pointer-events: none;
+      font-family: monospace;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .hero-desc {
+        max-width: 100%;
+      }
+
+      .hero-buttons {
+        justify-content: center;
+      }
+
+      .hero-video-space {
+        margin-top: 2rem;
+        min-height: 280px;
+      }
+
+      .video-carousel {
+        max-width: 400px;
+      }
+    }
+
+    /* ========== ABOUT SECTION ========== */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 0.9fr;
+      gap: 2.5rem;
+      background: #0f172a;
+      padding: 2rem;
+      border-radius: 32px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      align-items: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .about-grid:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 20px 35px -12px rgba(56, 189, 248, 0.15);
+      border-color: rgba(56, 189, 248, 0.4);
+    }
+
+    .about-left {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .about-text p {
+      color: #94a3b8;
+      margin-bottom: 0.9rem;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .about-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .personal-details {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+      margin: 0.5rem 0 0.25rem;
+      padding: 0.75rem 0;
+      border-top: 1px solid rgba(56, 189, 248, 0.15);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.15);
+    }
+
+    .detail-item {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      color: #cbd5e1;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+
+    .detail-item:hover {
+      transform: translateX(5px);
+      color: #38bdf8;
+    }
+
+    .detail-item:hover i {
+      color: #38bdf8;
+    }
+
+    .detail-item i {
+      color: #38bdf8;
+      font-size: 1rem;
+      width: 24px;
+      transition: transform 0.2s ease;
+    }
+
+    .detail-item:hover i {
+      transform: scale(1.1);
+    }
+
+    .exp-highlight {
+      background: rgba(56, 189, 248, 0.1);
+      padding: 0.25rem 0.9rem;
+      border-radius: 30px;
+      font-weight: 600;
+      color: #38bdf8;
+    }
+
+    .stats-container {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-top: 0.5rem;
+      background: #020617;
+      border-radius: 28px;
+      padding: 1.2rem 1rem;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+      flex: 1;
+      min-width: 90px;
+      transition: all 0.3s ease;
+      cursor: default;
+    }
+
+    .stat-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .stat-item:hover .stat-number {
+      text-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+    }
+
+    .stat-number {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: #38bdf8;
+      display: block;
+      line-height: 1.2;
+      transition: all 0.3s ease;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      color: #94a3b8;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+    }
+
+    .professional-img-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+
+    .about-professional-img {
+      width: 100%;
+      aspect-ratio: 1 / 1;
+      object-fit: cover;
+      border-radius: 24px;
+      box-shadow: 0 25px 40px -12px rgba(0, 0, 0, 0.5), 0 0 0 3px rgba(56, 189, 248, 0.3);
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      background: #1e293b;
+      display: block;
+    }
+
+
+    .professional-img-wrapper:hover .img-glow {
+      opacity: 0.7;
+    }
+
+    @media (max-width: 992px) {
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 1.8rem;
+      }
+
+      .about-right {
+        order: -1;
+        margin-bottom: 0.5rem;
+      }
+
+      .professional-img-wrapper {
+        max-width: 280px;
+      }
+
+      .personal-details {
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .stats-container {
+        justify-content: center;
+      }
+
+      .about-left {
+        text-align: center;
+      }
+
+      .about-text p {
+        text-align: left;
+      }
+
+      .personal-details {
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .about-grid {
+        padding: 1.2rem;
+      }
+
+      .personal-details {
+        gap: 0.8rem;
+        justify-content: center;
+      }
+
+      .detail-item {
+        font-size: 0.8rem;
+      }
+
+      .stat-number {
+        font-size: 1.5rem;
+      }
+    }
+
+    /* ========== SKILLS ========== */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.8rem;
+    }
+
+    .skill-card {
+      background: #0f172a;
+      border-radius: 24px;
+      padding: 1.8rem;
+      text-align: center;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(56, 189, 248, 0.1);
+      cursor: pointer;
+    }
+
+    .skill-card:hover {
+      border-color: #38bdf8;
+      box-shadow: 0 20px 35px -10px rgba(56, 189, 248, 0.3);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .skill-card i {
+      font-size: 2.5rem;
+      color: #38bdf8;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+    }
+
+    .skill-card:hover i {
+      transform: scale(1.15) rotate(5deg);
+      text-shadow: 0 0 15px rgba(56, 189, 248, 0.5);
+    }
+
+    .skill-card h3 {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+      transition: color 0.3s ease;
+    }
+
+    .skill-card:hover h3 {
+      color: #38bdf8;
+    }
+
+    .skill-card p {
+      font-size: 0.85rem;
+      color: #94a3b8;
+    }
+
+    /* ========== SERVICES ========== */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background: #0f172a;
+      border-radius: 28px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(56, 189, 248, 0.1);
+      cursor: pointer;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px) scale(1.01);
+      border-color: #38bdf8;
+      box-shadow: 0 20px 35px -10px rgba(56, 189, 248, 0.2);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .service-icon {
+      background: rgba(56, 189, 248, 0.1);
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 20px;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .service-card:hover .service-icon {
+      background: #38bdf8;
+      transform: rotate(10deg) scale(1.05);
+    }
+
+    .service-card:hover .service-icon i {
+      color: #020617;
+    }
+
+    .service-icon i {
+      font-size: 1.8rem;
+      color: #38bdf8;
+      transition: all 0.3s ease;
+    }
+
+    .service-card h3 {
+      margin-bottom: 0.8rem;
+      font-size: 1.4rem;
+      transition: color 0.3s ease;
+    }
+
+    .service-card:hover h3 {
+      color: #38bdf8;
+    }
+
+    .service-card p {
+      color: #94a3b8;
+      line-height: 1.5;
+    }
+
+    /* ========== PROJECTS ========== */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 2rem;
+    }
+
+    .project-card {
+      background: #0f172a;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      cursor: pointer;
+    }
+
+    .project-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 25px 40px -12px rgba(56, 189, 248, 0.25);
+      border-color: #38bdf8;
+    }
+
+    .project-img {
+      overflow: hidden;
+    }
+
+    .project-img img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    }
+
+    .project-card:hover .project-img img {
+      transform: scale(1.08);
+    }
+
+    .project-content {
+      padding: 1.5rem;
+    }
+
+    .project-content h3 {
+      font-size: 1.4rem;
+      margin-bottom: 0.6rem;
+      transition: color 0.3s ease;
+    }
+
+    .project-card:hover .project-content h3 {
+      color: #38bdf8;
+    }
+
+    .project-content p {
+      color: #94a3b8;
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+    }
+
+    .project-tech span {
+      background: rgba(56, 189, 248, 0.15);
+      padding: 0.2rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.7rem;
+      font-weight: 500;
+      color: #38bdf8;
+      transition: all 0.2s ease;
+    }
+
+    .project-tech span:hover {
+      background: #38bdf8;
+      color: #020617;
+      transform: scale(1.05);
+    }
+
+    .project-links {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .project-link {
+      text-decoration: none;
+      color: #38bdf8;
+      font-weight: 500;
+      font-size: 0.85rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .project-link:hover {
+      color: white;
+      gap: 12px;
+      transform: translateX(3px);
+    }
+
+    .project-link.disabled {
+      color: #64748b;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ========== CONTACT ========== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 2rem;
+    }
+
+    .contact-info-card {
+      background: #0f172a;
+      border-radius: 28px;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .contact-info-card:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+      box-shadow: 0 15px 30px -10px rgba(56, 189, 248, 0.15);
+    }
+
+    .contact-detail {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: transform 0.2s ease;
+    }
+
+    .contact-detail:hover {
+      transform: translateX(8px);
+    }
+
+    .contact-detail i {
+      font-size: 1.5rem;
+      color: #38bdf8;
+      width: 40px;
+      transition: transform 0.2s ease;
+    }
+
+    .contact-detail:hover i {
+      transform: scale(1.1);
+    }
+
+    .contact-detail a {
+      color: #cbd5e1;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+
+    .contact-detail a:hover {
+      color: #38bdf8;
+    }
+
+    .whatsapp a {
+      color: #25D366;
+      font-weight: 600;
+    }
+
+    .whatsapp a:hover {
+      font-weight: 600;
+    }
+
+    .contact-form {
+      background: #0f172a;
+      border-radius: 28px;
+      padding: 2rem;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .contact-form:hover {
+      transform: translateY(-5px);
+      border-color: #38bdf8;
+      box-shadow: 0 15px 30px -10px rgba(56, 189, 248, 0.15);
+    }
+
+    .contact-form input,
+    .contact-form textarea {
+      width: 100%;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      background: #020617;
+      border: 1px solid #1e293b;
+      border-radius: 20px;
+      color: white;
+      font-family: 'Inter', sans-serif;
+      transition: all 0.3s ease;
+    }
+
+    .contact-form input:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: #38bdf8;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+      transform: scale(1.01);
+    }
+
+    .contact-form input:hover,
+    .contact-form textarea:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    @media (max-width: 800px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ========== FOOTER ========== */
+    .footer {
+      border-top: 1px solid rgba(56, 189, 248, 0.2);
+      padding: 2rem 0;
+      margin-top: 2rem;
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .footer p {
+      color: #64748b;
+      font-size: 0.85rem;
+    }
+
+    .footer-social {
+      display: flex;
+      gap: 1.2rem;
+    }
+
+    .footer-social a {
+      color: #94a3b8;
+      font-size: 1.2rem;
+      transition: all 0.3s ease;
+    }
+
+    .footer-social a:hover {
+      color: #38bdf8;
+      transform: translateY(-3px) scale(1.1);
+    }
+
+    /* Custom Toast */
+    .custom-toast {
+      transition: opacity 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* ========== ADDED: SCROLL TO TOP BUTTON STYLES ========== */
+    .scroll-top-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 48px;
+      height: 48px;
+      background: #38bdf8;
+      color: #020617;
+      border: none;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(56, 189, 248, 0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .scroll-top-btn:hover {
+      background: #0ea5e9;
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(56, 189, 248, 0.4);
+    }
+
+    .scroll-top-btn.show {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    @media (max-width: 768px) {
+      .scroll-top-btn {
+        bottom: 20px;
+        right: 20px;
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+      }
+    }
+
+    /* ========== ADDED: Fix Browser Autofill Styles ========== */
+    /* Override Chrome's default yellow autofill background */
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus,
+    input:-webkit-autofill:active,
+    textarea:-webkit-autofill,
+    textarea:-webkit-autofill:hover,
+    textarea:-webkit-autofill:focus,
+    textarea:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px #020617 inset !important;
+      -webkit-text-fill-color: #ffffff !important;
+      caret-color: #ffffff !important;
+      transition: background-color 5000s ease-in-out 0s;
+    }
+
+    /* Ensure autofill doesn't break border styling */
+    input:-webkit-autofill:focus,
+    textarea:-webkit-autofill:focus {
+      border-color: #38bdf8 !important;
+      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1), 0 0 0 30px #020617 inset !important;
+    }
+
+    /* Prevent autofill from causing layout shifts */
+    .contact-form input,
+    .contact-form textarea {
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+    }
+
+    /* Ensure consistent appearance across browsers */
+    .contact-form input,
+    .contact-form textarea {
+      background: #020617;
+    }
+
+    /* ========== ADDED: Customer Reviews Section Styles ========== */
+    .reviews-section {
+      margin-top: 2rem;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .review-card {
+      background: #0f172a;
+      border-radius: 28px;
+      padding: 2rem;
+      transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+      border: 1px solid rgba(56, 189, 248, 0.1);
+      position: relative;
+    }
+
+    .review-card:hover {
+      transform: translateY(-8px);
+      border-color: #38bdf8;
+      box-shadow: 0 20px 35px -10px rgba(56, 189, 248, 0.2);
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    }
+
+    .review-icon {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      opacity: 0.15;
+      font-size: 3rem;
+      color: #38bdf8;
+    }
+
+    .review-text {
+      margin-bottom: 1.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .review-text p {
+      color: #cbd5e1;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .reviewer {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-top: 1px solid rgba(56, 189, 248, 0.15);
+      padding-top: 1.2rem;
+    }
+
+    .reviewer-avatar i {
+      font-size: 3rem;
+      color: #38bdf8;
+    }
+
+    .reviewer-info h4 {
+      font-size: 1rem;
+      margin-bottom: 0.2rem;
+      color: #ffffff;
+    }
+
+    .reviewer-info p {
+      font-size: 0.75rem;
+      color: #94a3b8;
+      margin-bottom: 0.3rem;
+    }
+
+    .review-stars {
+      display: flex;
+      gap: 0.25rem;
+    }
+
+    .review-stars i {
+      font-size: 0.8rem;
+      color: #fbbf24;
+    }
+
+    @media (max-width: 768px) {
+      .reviews-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .review-card {
+        padding: 1.5rem;
+      }
+
+      .review-icon {
+        font-size: 2.5rem;
+      }
+
+      .review-text p {
+        font-size: 0.85rem;
+      }
+    }
+
+    /* ========== END CUSTOMER REVIEWS SECTION STYLES ========== */
+
+    /* ========== ADDED: Project Image Responsive Styles ========== */
+    .project-img {
+      width: 100%;
+      height: auto;
+      min-height: 220px;
+      background: linear-gradient(135deg, #0f172a 0%, #020617 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-img img {
+      width: 100%;
+      height: auto;
+      min-height: 220px;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+    }
+
+    /* Ensure images scale properly on all devices */
+    @media (max-width: 1200px) {
+      .project-img img {
+        min-height: 200px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .project-img img {
+        min-height: 180px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .project-img img {
+        min-height: 160px;
+      }
+    }
+
+    /* ========== END PROJECT IMAGE RESPONSIVE STYLES ========== */
+    /* ========== END AUTOFILL FIX ========== */
+    /* ========== END SCROLL TO TOP BUTTON STYLES ========== */
+  </style>
 </head>
+
 <body>
-    <div class="cursor"></div>
-    <div class="cursor-trail"></div>
-    <canvas id="particles-canvas"></canvas>
 
-    <nav>
-        <div class="logo">Raja S</div>
-        <button class="hamburger" id="hamburgerBtn" aria-label="menu">
-            <i class="fas fa-bars"></i>
-        </button>
-        <div class="nav-links" id="navLinks">
-            <a href="#about">About</a>
-            <a href="#skills">Skills</a>
-            <a href="#projects">Project</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
-
-    <section class="hero fade-up">
-        <div class="hero-text">
-            <div class="badge">
-                <i class="fas fa-code"></i> Web Developer
-            </div>
-            <h1>Hi, I'm <span class="gradient-text">Raja S</span></h1>
-            <p style="font-size: 1rem; color: #cbd5e6;">B.Sc Computer Science Student & Frontend Developer</p>
-            <div class="hero-desc">
-                I build modern, responsive business websites using core web technologies. Passionate about clean design
-                and smooth user experiences.
-            </div>
-            <div class="btn-group">
-                <a href="#projects" class="btn-primary"><i class="fas fa-arrow-down"></i> View Project</a>
-                <a href="#contact" class="btn-outline"><i class="fas fa-paper-plane"></i> Contact Me</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <div class="img-wrapper">
-                <img src="profile.jpg" alt="Raja S" id="profileImg"
-                    onerror="this.src='https://ui-avatars.com/api/?background=0F172A&color=38bdf8&bold=true&size=200&name=Raja+S';">
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="fade-up">
-        <h2 class="section-title">About <span>Me</span></h2>
-        <div class="about-card">
-            <p>I'm a passionate Computer Science student at <strong>Muthayammal Memorial College</strong>
-                with a strong foundation in web development. I specialize in creating pixel-perfect,
-                responsive websites that help businesses establish a strong online presence.
-                I focus on writing clean HTML, modern CSS, and interactive JavaScript to bring ideas to life.</p>
-            <br>
-            <p>🚀 Currently exploring advanced JavaScript concepts and UI/UX best practices to craft better digital
-                experiences.</p>
-        </div>
-    </section>
-
-    <section id="skills" class="fade-up">
-        <h2 class="section-title">Core <span>Skills</span></h2>
-        <div class="skills-grid">
-            <div class="skill-item"><i class="fab fa-html5"></i> HTML5</div>
-            <div class="skill-item"><i class="fab fa-css3-alt"></i> CSS3</div>
-            <div class="skill-item"><i class="fab fa-js"></i> JavaScript</div>
-        </div>
-        <p style="text-align: center; margin-top: 1.5rem; color: #94a3b8;">Building responsive, accessible and interactive web experiences</p>
-    </section>
-
-    <section id="projects" class="fade-up">
-        <h2 class="section-title">Featured <span>Project</span></h2>
-        <div class="projects-single" style="display: flex; justify-content: center;">
-            <div class="project-card">
-                <div style="font-size: 2rem; margin-bottom: 0.8rem;"><i class="fas fa-paint-roller"></i></div>
-                <h3 style="margin-bottom: 0.8rem;">Paint Shop Website</h3>
-                <p style="margin-bottom: 1rem;">A complete business website for a professional paint shop. Modern UI with product showcase,
-                    color swatches, smooth navigation, and fully responsive layout.</p>
-                <div>
-                    <span class="tech-tag">HTML5</span>
-                    <span class="tech-tag">CSS3</span>
-                    <span class="tech-tag">JavaScript</span>
-                    <span class="tech-tag">Responsive Design</span>
-                </div>
-                <a href="https://abukutty.github.io/SMT/" target="_blank" class="view-project-btn">
-                    <i class="fas fa-eye"></i> View Paint Shop Website
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section id="contact" class="fade-up">
-        <h2 class="section-title">Let's <span>Connect</span></h2>
-        <div class="contact-container">
-            <a href="tel:9047854498" class="contact-card"><i class="fas fa-phone-alt"></i><span>+91 90478 54498</span></a>
-            <a href="mailto:rajasanthi0709@gmail.com" class="contact-card"><i class="fas fa-envelope"></i><span>Email Me</span></a>
-            <a href="https://github.com/abukutty" target="_blank" class="contact-card"><i class="fab fa-github"></i><span>GitHub</span></a>
-        </div>
-        <div style="text-align: center; margin-top: 1.5rem;">
-            <p style="color:#94a3b8;">✨ Open for freelance projects & collaborations ✨</p>
-        </div>
-    </section>
-
-    <footer>
-        <p>© 2026 Raja S — Built with <i class="fas fa-heart" style="color:#38bdf8;"></i> HTML, CSS & JS | All Rights Reserved</p>
-    </footer>
-
-    <div class="scroll-top" id="scrollTopBtn">
-        <i class="fas fa-arrow-up"></i>
+  <nav class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="#" class="logo">Raja<span class="dot"> </span></span>S</a>
+      <div class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="#home" class="nav-link">Home</a></li>
+        <li><a href="#about" class="nav-link">About</a></li>
+        <li><a href="#skills" class="nav-link">Skills</a></li>
+        <li><a href="#services" class="nav-link">Services</a></li>
+        <li><a href="#projects" class="nav-link">Projects</a></li>
+        <li><a href="#contact" class="nav-link">Contact</a></li>
+      </ul>
     </div>
+  </nav>
 
-    <script>
-(function() {
-    const hamburger = document.getElementById('hamburgerBtn');
-    const navLinks = document.getElementById('navLinks');
-    const body = document.body;
+  <main>
+    <!-- Hero Section with Video Loop Showcase -->
+    <section id="home" class="hero" data-aos="fade-up" data-aos-duration="1000">
+      <div class="container hero-grid">
+        <div class="hero-content" data-aos="fade-right" data-aos-delay="200">
+          <div class="hero-badge">✨ Web Developer</div>
+          <h1 class="hero-title">I build modern websites <br> for businesses <span class="wave">🚀</span></h1>
+          <p class="hero-desc">Helping businesses grow online with fast, responsive, and user-friendly websites. Let's
+            turn your vision into reality.</p>
+          <div class="hero-buttons">
+            <a href="#projects" class="btn btn-primary">View Projects</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+            <a href="#" class="btn btn-outline" id="resumeBtn">Resume <i class="fas fa-download"></i></a>
+          </div>
+        </div>
+        <!-- VIDEO SHOWCASE: 5 videos (video1.mp4 to video5.mp4) play one by one in an infinite loop -->
+        <div class="hero-video-space" data-aos="fade-left" data-aos-delay="300">
+          <div class="video-carousel">
+            <video id="rotatingVideo" class="rotating-video" muted playsinline autoplay>
+              <source src="" type="video/mp4">
+              Your browser does not support video.
+            </video>
+            <div class="video-caption" id="videoCaption">🎬 creative showcase</div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    let scrollPosition = 0;
+    <!-- About Section -->
+    <section id="about" class="about" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
+      <div class="container">
+        <div class="section-header" data-aos="fade-down">
+          <span class="section-tag">About Me</span>
+          <h2>Turning ideas into <span class="accent">digital experiences</span></h2>
+        </div>
+        <div class="about-grid" data-aos="zoom-in" data-aos-delay="200">
+          <div class="about-left">
+            <div class="about-text">
+              <p>Hi, I'm <strong>Raja S</strong>, a passionate Frontend Developer from Tamil Nadu, India. I graduated
+                with a B.Sc in Computer Science from Muthayammal Memorial College, where I discovered my love for
+                crafting clean, intuitive interfaces.</p>
+              <p>Over the past years, I've helped numerous small businesses and startups establish a strong online
+                presence. My approach combines modern design principles with performance-first development — ensuring
+                your website not only looks stunning but also loads fast and ranks well.</p>
+              <p>My goal is simple: <strong>build websites that drive growth</strong>. Whether you need a business
+                website, a high-converting landing page, or a complete redesign, I'm here to bring your brand to life
+                with code that's scalable and future-proof.</p>
+            </div>
+            <div class="personal-details">
+              <div class="detail-item"><i class="fas fa-map-marker-alt"></i> Tamil Nadu, India</div>
+              <div class="detail-item"><i class="fas fa-graduation-cap"></i> B.Sc Computer Science</div>
+              <div class="detail-item"><i class="fas fa-laptop-code"></i> <span class="exp-highlight">2+ Years
+                  Experience</span></div>
+            </div>
+            <div class="stats-container">
+              <div class="stat-item"><span class="stat-number">2+</span><span class="stat-label">Projects
+                  Completed</span></div>
+              <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Client
+                  Satisfaction</span></div>
+              <div class="stat-item"><span class="stat-number">24/7</span><span class="stat-label">Support</span></div>
+            </div>
+          </div>
+          <div class="about-right">
+            <div class="professional-img-wrapper">
+              <div class="img-glow"></div>
+              <img src="IMG_7269.JPG" alt="Raja S - Professional Portrait" class="about-professional-img"
+                onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f172a/38bdf8?text=Raja+S';">
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    // =========================
-    // HAMBURGER MENU + SCROLL LOCK (FIXED)
-    // =========================
-    if (hamburger && navLinks) {
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+    <!-- Skills Section -->
+    <section id="skills" class="skills" data-aos="fade-up" data-aos-duration="800">
+      <div class="container">
+        <div class="section-header" data-aos="fade-down">
+          <span class="section-tag">Tech Stack</span>
+          <h2>My <span class="accent">Development Arsenal</span></h2>
+        </div>
+        <div class="skills-grid">
+          <div class="skill-card" data-aos="flip-left" data-aos-delay="100"><i class="fab fa-html5"></i>
+            <h3>HTML5</h3>
+            <p>Semantic, accessible markup</p>
+          </div>
+          <div class="skill-card" data-aos="flip-left" data-aos-delay="150"><i class="fab fa-css3-alt"></i>
+            <h3>CSS3</h3>
+            <p>Flex, Grid, Animations</p>
+          </div>
+          <div class="skill-card" data-aos="flip-left" data-aos-delay="200"><i class="fab fa-js"></i>
+            <h3>JavaScript</h3>
+            <p>DOM</p>
+          </div>
+          <div class="skill-card" data-aos="flip-left" data-aos-delay="250"><i class="fas fa-mobile-alt"></i>
+            <h3>Responsive Design</h3>
+            <p>Mobile-first approach</p>
+          </div>
+          <div class="skill-card" data-aos="flip-left" data-aos-delay="300"><i class="fab fa-git-alt"></i>
+            <h3>Git & GitHub</h3>
+            <p>Version control, collaboration</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-            if (navLinks.classList.contains('active')) {
-                // Save scroll position
-                scrollPosition = window.pageYOffset;
+    <!-- Services Section -->
+    <section id="services" class="services" data-aos="fade-up" data-aos-duration="800">
+      <div class="container">
+        <div class="section-header" data-aos="fade-down">
+          <span class="section-tag">What I Offer</span>
+          <h2>Services to grow <span class="accent">your business</span></h2>
+        </div>
+        <div class="services-grid">
+          <div class="service-card" data-aos="zoom-in-up" data-aos-delay="100">
+            <div class="service-icon"><i class="fas fa-building"></i></div>
+            <h3>Business Websites</h3>
+            <p>Professional, fully responsive websites that showcase your brand and convert visitors into customers.</p>
+          </div>
+          <div class="service-card" data-aos="zoom-in-up" data-aos-delay="200">
+            <div class="service-icon"><i class="fas fa-landmark"></i></div>
+            <h3>Landing Pages</h3>
+            <p>High-converting, SEO-optimized landing pages designed for campaigns, product launches, and lead
+              generation.</p>
+          </div>
+          <div class="service-card" data-aos="zoom-in-up" data-aos-delay="300">
+            <div class="service-icon"><i class="fas fa-sync-alt"></i></div>
+            <h3>Website Redesign</h3>
+            <p>Modernize outdated websites with improved UI/UX, faster performance, and a fresh, engaging look.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-                // Lock scroll (strong fix)
-                body.style.position = 'fixed';
-                body.style.top = `-${scrollPosition}px`;
-                body.style.left = '0';
-                body.style.right = '0';
-                body.classList.add('menu-open');
+    <!-- Projects Section -->
+    <section id="projects" class="projects" data-aos="fade-up" data-aos-duration="800">
+      <div class="container">
+        <div class="section-header" data-aos="fade-down">
+          <span class="section-tag">Featured Work</span>
+          <h2>Recent <span class="accent">Projects</span></h2>
+        </div>
+        <div class="projects-grid">
+          <!-- Project 1 - Paint Shop -->
+          <div class="project-card" data-aos="flip-up" data-aos-delay="100">
+            <div class="project-img">
+              <img src="" alt="Paint Shop Website">
+            </div>
+            <div class="project-content">
+              <h3>Paint Shop Website</h3>
+              <p>Modern e-commerce style website for a local paint shop featuring product grid, color swatches.</p>
+              <div class="project-tech">
+                <span>HTML5</span>
+                <span>CSS3</span>
+                <span>JS</span>
+              </div>
+              <div class="project-links">
+                <a href="https://s-rajaa.github.io/SMT/" target="_blank" class="project-link"><i
+                    class="fas fa-external-link-alt"></i> Live Demo</a>
+                <a href="https://github.com/s-rajaa/SMT" target="_blank" class="project-link"><i
+                    class="fab fa-github"></i> GitHub</a>
+              </div>
+            </div>
+          </div>
 
-            } else {
-                // Unlock scroll
-                body.style.position = '';
-                body.style.top = '';
-                body.style.left = '';
-                body.style.right = '';
-                body.classList.remove('menu-open');
+          <!-- Project 2 - Business Launchpad -->
+          <div class="project-card" data-aos="flip-up" data-aos-delay="200">
+            <div class="project-img">
+              <img src="https://placehold.co/600x400/0f172a/38bdf8?text=Business+Launchpad"
+                alt="Business Launchpad Website">
+            </div>
+            <div class="project-content">
+              <h3>Business Launchpad</h3>
+              <p>Corporate startup website with service sections, animated stats, responsive design.</p>
+              <div class="project-tech">
+                <span>HTML5</span>
+                <span>CSS Grid</span>
+                <span>JS</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link disabled">Live Demo (soon)</a>
+                <a href="https://github.com/s-rajaa" target="_blank" class="project-link"><i class="fab fa-github"></i>
+                  GitHub</a>
+              </div>
+            </div>
+          </div>
 
-                // Restore scroll
-                window.scrollTo(0, scrollPosition);
-            }
+          <!-- Project 3 - Analytics Dashboard -->
+          <div class="project-card" data-aos="flip-up" data-aos-delay="300">
+            <div class="project-img">
+              <img src="https://placehold.co/600x400/0f172a/38bdf8?text=Analytics+Dashboard"
+                alt="Analytics Dashboard UI">
+            </div>
+            <div class="project-content">
+              <h3>Analytics Dashboard UI</h3>
+              <p>Interactive data dashboard with charts and dark mode, complex UI and real-time data.</p>
+              <div class="project-tech">
+                <span>Chart.js</span>
+                <span>CSS</span>
+                <span>JS</span>
+              </div>
+              <div class="project-links">
+                <a href="#" class="project-link disabled">Live Demo</a>
+                <a href="https://github.com/s-rajaa" target="_blank" class="project-link"><i class="fab fa-github"></i>
+                  GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-            // Icon change
-            const icon = hamburger.querySelector('i');
-            if (navLinks.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-times');
-            } else {
-                icon.classList.replace('fa-times', 'fa-bars');
-            }
-        });
+        <!-- ========== ADDED: Customer Reviews Section ========== -->
+        <div class="reviews-section" data-aos="fade-up" data-aos-delay="400">
+          <div class="section-header" style="margin-top: 3rem;">
+            <span class="section-tag">Testimonials</span>
+            <h2>What <span class="accent">Clients Say</span></h2>
+          </div>
 
-        // Close menu when clicking links
-        navLinks.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', () => {
-                navLinks.classList.remove('active');
+          <div class="reviews-grid">
+            <!-- Review 1 -->
+            <div class="review-card" data-aos="zoom-in" data-aos-delay="100">
+              <div class="review-icon">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <div class="review-text">
+                <p>"Raja did an amazing job on our company website! The design is modern, responsive, and loads quickly.
+                  He was professional and delivered before the deadline. Highly recommend!"</p>
+              </div>
+              <div class="reviewer">
+                <div class="reviewer-avatar">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="reviewer-info">
+                  <h4>Priya Sharma</h4>
+                  <p>Business Owner, TechSolutions</p>
+                  <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                body.style.position = '';
-                body.style.top = '';
-                body.style.left = '';
-                body.style.right = '';
-                body.classList.remove('menu-open');
+            <!-- Review 2 -->
+            <div class="review-card" data-aos="zoom-in" data-aos-delay="200">
+              <div class="review-icon">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <div class="review-text">
+                <p>"Working with Raja was a pleasure. He understood our requirements perfectly and created a stunning
+                  landing page that increased our conversions by 40%. Great attention to detail!"</p>
+              </div>
+              <div class="reviewer">
+                <div class="reviewer-avatar">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="reviewer-info">
+                  <h4>Arun Kumar</h4>
+                  <p>Marketing Director, BrandCraft</p>
+                  <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-                window.scrollTo(0, scrollPosition);
+            <!-- Review 3 -->
+            <div class="review-card" data-aos="zoom-in" data-aos-delay="300">
+              <div class="review-icon">
+                <i class="fas fa-quote-left"></i>
+              </div>
+              <div class="review-text">
+                <p>"Excellent frontend developer! Raja transformed our outdated website into a modern, fast, and
+                  user-friendly platform. The code is clean and well-structured. Will hire again!"</p>
+              </div>
+              <div class="reviewer">
+                <div class="reviewer-avatar">
+                  <i class="fas fa-user-circle"></i>
+                </div>
+                <div class="reviewer-info">
+                  <h4>Meera Iyer</h4>
+                  <p>Founder, StartUpHub</p>
+                  <div class="review-stars">
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- ========== END CUSTOMER REVIEWS SECTION ========== -->
+      </div>
+    </section>
 
-                hamburger.querySelector('i').classList.replace('fa-times', 'fa-bars');
-            });
-        });
-    }
+    <!-- Contact Section -->
+    <section id="contact" class="contact" data-aos="fade-up" data-aos-duration="800">
+      <div class="container">
+        <div class="section-header" data-aos="fade-down">
+          <span class="section-tag">Get In Touch</span>
+          <h2>Let's work <span class="accent">together</span></h2>
+        </div>
+        <div class="contact-grid">
+          <div class="contact-info-card" data-aos="fade-right" data-aos-delay="100">
+            <div class="contact-detail"><i class="fas fa-phone-alt"></i>
+              <div><strong>Phone</strong><br><a href="tel:+919047854498">+91 90478 54498</a></div>
+            </div>
+            <div class="contact-detail"><i class="fas fa-envelope"></i>
+              <div><strong>Email</strong><br><a href="mailto:rajaasanthii@gmail.com">rajaasanthii@gmail.com</a></div>
+            </div>
+            <div class="contact-detail"><i class="fab fa-github"></i>
+              <div><strong>GitHub</strong><br><a href="https://github.com/s-rajaa"
+                  target="_blank">github.com/s-rajaa</a></div>
+            </div>
+            <div class="contact-detail whatsapp"><i class="fab fa-whatsapp"></i>
+              <div><strong>WhatsApp</strong><br><a
+                  href="https://wa.me/919047854498?text=Hello%20Raja%2C%20I%27m%20interested%20in%20your%20web%20development%20services!"
+                  target="_blank">Click to chat →</a></div>
+            </div>
+          </div>
+          <div class="contact-form" data-aos="fade-left" data-aos-delay="150">
+            <!-- FIXED: Added autocomplete attributes to prevent autofill dropdown interference -->
+            <form id="contactForm">
+              <input type="text" name="entry.1345746856" placeholder="Your Name" autocomplete="new-name" required>
+              <input type="email" name="entry.1117149924" placeholder="Your Email" autocomplete="new-email" required>
+              <textarea name="entry.1773003349" rows="4" placeholder="Tell me about your project..."
+                autocomplete="off"></textarea>
+              <button type="submit" class="btn btn-primary full-width">Send Message <i
+                  class="fas fa-paper-plane"></i></button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
 
-    // =========================
-    // CUSTOM CURSOR (DESKTOP)
-    // =========================
-    if(window.innerWidth > 768) {
-        const cursor = document.querySelector('.cursor');
-        const trail = document.querySelector('.cursor-trail');
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p>© 2025 Raja S — Frontend Developer. All rights reserved.</p>
+        <div class="footer-social"><a href="https://github.com/s-rajaa" target="_blank"><i
+              class="fab fa-github"></i></a><a href="https://wa.me/919047854498" target="_blank"><i
+              class="fab fa-whatsapp"></i></a><a href="mailto:rajaasanthii@gmail.com"><i
+              class="fas fa-envelope"></i></a></div>
+      </div>
+    </div>
+  </footer>
 
-        if(cursor && trail) {
-            let mouseX = 0, mouseY = 0;
-            let trailX = 0, trailY = 0;
+  <!-- ADDED: Scroll to Top Button HTML -->
+  <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
 
-            document.addEventListener('mousemove', (e) => {
-                mouseX = e.clientX;
-                mouseY = e.clientY;
-                cursor.style.transform = `translate(${mouseX}px, ${mouseY}px)`;
-            });
-
-            function animateTrail() {
-                trailX += (mouseX - trailX) * 0.2;
-                trailY += (mouseY - trailY) * 0.2;
-                trail.style.transform = `translate(${trailX}px, ${trailY}px)`;
-                requestAnimationFrame(animateTrail);
-            }
-
-            animateTrail();
-        }
-    }
-
-    // =========================
-    // PARTICLES
-    // =========================
-    const canvas = document.getElementById('particles-canvas');
-    if(canvas) {
-        const ctx = canvas.getContext('2d');
-        let width = window.innerWidth;
-        let height = window.innerHeight;
-
-        canvas.width = width;
-        canvas.height = height;
-
-        let particles = [];
-
-        for (let i = 0; i < 50; i++) {
-            particles.push({
-                x: Math.random() * width,
-                y: Math.random() * height,
-                radius: Math.random() * 2 + 1,
-                alpha: Math.random() * 0.4,
-                speedX: (Math.random() - 0.5) * 0.2,
-                speedY: (Math.random() - 0.5) * 0.2,
-            });
-        }
-
-        function drawParticles() {
-            ctx.clearRect(0, 0, width, height);
-
-            particles.forEach(p => {
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(56, 189, 248, ${p.alpha})`;
-                ctx.fill();
-
-                p.x += p.speedX;
-                p.y += p.speedY;
-
-                if (p.x < 0) p.x = width;
-                if (p.x > width) p.x = 0;
-                if (p.y < 0) p.y = height;
-                if (p.y > height) p.y = 0;
-            });
-
-            requestAnimationFrame(drawParticles);
-        }
-
-        drawParticles();
-
-        window.addEventListener('resize', () => {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            canvas.width = width;
-            canvas.height = height;
-        });
-    }
-
-    // =========================
-    // SMOOTH SCROLL
-    // =========================
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-            const target = document.querySelector(this.getAttribute('href'));
-            if(target) {
-                e.preventDefault();
-                window.scrollTo({
-                    top: target.offsetTop - 80,
-                    behavior: 'smooth'
-                });
-            }
-        });
+  <!-- AOS Library -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    // Initialize AOS Scroll Reveal
+    AOS.init({
+      duration: 800,
+      easing: 'ease-in-out',
+      once: true,
+      offset: 100,
+      disable: 'mobile'
     });
 
-    // =========================
-    // FADE ANIMATION
-    // =========================
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if(entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
+    // ========== INFINITE VIDEO LOOP: video1.mp4 -> video2.mp4 -> ... -> video5.mp4 -> repeat forever ==========
+    (function initInfiniteVideoLoop() {
+      const videoElement = document.getElementById('rotatingVideo');
+      const captionSpan = document.getElementById('videoCaption');
+      if (!videoElement) return;
+
+      // List of 5 video files - place these in the same folder as your HTML
+      const videoFiles = ['video1.mp4', 'video2.mp4', 'video3.mp4', 'video4.mp4', 'video5.mp4'];
+      let currentVideoIndex = 0;
+      let isLoading = false;
+
+      // Function to load and play a specific video by index
+      function loadVideoByIndex(index) {
+        if (isLoading) return;
+        isLoading = true;
+
+        const videoUrl = videoFiles[index];
+
+        // Fade out effect
+        videoElement.style.transition = 'opacity 0.2s ease';
+        videoElement.style.opacity = '0';
+
+        setTimeout(() => {
+          // Set new source and load
+          videoElement.src = videoUrl;
+          videoElement.load();
+
+          // REMOVED: Video counter (1/5, 2/5, etc.) - keeping caption simple
+          if (captionSpan) {
+            captionSpan.innerHTML = `🎬 creative showcase`;
+          }
+
+          // Play the video (muted to ensure autoplay policies)
+          const playPromise = videoElement.play();
+          if (playPromise !== undefined) {
+            playPromise.then(() => {
+              videoElement.style.opacity = '1';
+              isLoading = false;
+            }).catch(error => {
+              console.warn("Playback prevented, ensuring muted autoplay", error);
+              videoElement.muted = true;
+              videoElement.play().then(() => {
+                videoElement.style.opacity = '1';
+                isLoading = false;
+              }).catch(e => {
+                console.error("Video play failed:", e);
+                isLoading = false;
+              });
+            });
+          } else {
+            videoElement.style.opacity = '1';
+            isLoading = false;
+          }
+        }, 200);
+      }
+
+      // When current video ends, go to next video (infinite loop)
+      function onVideoEnded() {
+        // Move to next video index, wrap around to 0 after last video
+        currentVideoIndex = (currentVideoIndex + 1) % videoFiles.length;
+        loadVideoByIndex(currentVideoIndex);
+      }
+
+      // Handle video loading errors: skip to next video
+      function onVideoError() {
+        console.warn(`Video ${videoFiles[currentVideoIndex]} failed to load, skipping to next.`);
+        currentVideoIndex = (currentVideoIndex + 1) % videoFiles.length;
+        loadVideoByIndex(currentVideoIndex);
+      }
+
+      // Initialize first video
+      function init() {
+        currentVideoIndex = 0;
+        videoElement.muted = true;
+        videoElement.setAttribute('playsinline', 'true');
+        videoElement.style.opacity = '1';
+
+        // Set up event listeners
+        videoElement.addEventListener('ended', onVideoEnded);
+        videoElement.addEventListener('error', onVideoError);
+
+        // Load first video
+        const firstUrl = videoFiles[0];
+        videoElement.src = firstUrl;
+        videoElement.load();
+
+        if (captionSpan) {
+          captionSpan.innerHTML = `🎬 creative showcase`;
+        }
+
+        // Attempt to play
+        videoElement.play().catch(e => {
+          console.log("Autoplay prevented, using muted fallback");
+          videoElement.muted = true;
+          videoElement.play();
         });
-    }, { threshold: 0.1 });
+      }
 
-    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+      init();
+    })();
 
-    // =========================
-    // SCROLL TOP BUTTON
-    // =========================
-    const scrollBtn = document.getElementById('scrollTopBtn');
+    // Navbar and interactions (preserved full functionality)
+    (function () {
+      const navbar = document.getElementById('navbar');
+      const navLinks = document.querySelectorAll('.nav-link');
+      const sections = document.querySelectorAll('section');
+      const hamburger = document.getElementById('hamburger');
+      const navMenu = document.getElementById('nav-menu');
 
-    window.addEventListener('scroll', () => {
-        if(window.scrollY > 300) {
-            scrollBtn.classList.add('show');
+      window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+          navbar.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.3)';
+          navbar.style.borderBottom = '1px solid rgba(56, 189, 248, 0.3)';
         } else {
-            scrollBtn.classList.remove('show');
+          navbar.style.boxShadow = 'none';
+          navbar.style.borderBottom = '1px solid rgba(56, 189, 248, 0.2)';
         }
-    });
+      });
 
-    scrollBtn.addEventListener('click', () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // =========================
-    // RIPPLE EFFECT
-    // =========================
-    const btns = document.querySelectorAll('.btn-primary, .btn-outline, .view-project-btn');
-
-    btns.forEach(btn => {
-        btn.addEventListener('click', function(e) {
-            const ripple = document.createElement('span');
-            ripple.classList.add('ripple');
-            this.appendChild(ripple);
-
-            const rect = this.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            ripple.style.left = `${x}px`;
-            ripple.style.top = `${y}px`;
-
-            setTimeout(() => ripple.remove(), 600);
+      if (hamburger) {
+        hamburger.addEventListener('click', () => {
+          navMenu.classList.toggle('active');
+          const spans = hamburger.querySelectorAll('span');
+          if (navMenu.classList.contains('active')) {
+            spans[0].style.transform = 'rotate(45deg) translate(5px, 5px)';
+            spans[1].style.opacity = '0';
+            spans[2].style.transform = 'rotate(-45deg) translate(5px, -5px)';
+          } else {
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+          }
         });
-    });
+      }
 
-})();
-</script>
+      navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          if (navMenu.classList.contains('active')) {
+            navMenu.classList.remove('active');
+            if (hamburger) {
+              const spans = hamburger.querySelectorAll('span');
+              spans[0].style.transform = 'none';
+              spans[1].style.opacity = '1';
+              spans[2].style.transform = 'none';
+            }
+          }
+        });
+      });
+
+      function updateActiveLink() {
+        let current = '';
+        const scrollPos = window.scrollY + 150;
+        sections.forEach(section => {
+          const sectionTop = section.offsetTop;
+          const sectionHeight = section.clientHeight;
+          if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            current = section.getAttribute('id');
+          }
+        });
+        navLinks.forEach(link => {
+          const href = link.getAttribute('href').substring(1);
+          if (href === current) link.classList.add('active');
+          else link.classList.remove('active');
+        });
+      }
+      window.addEventListener('scroll', updateActiveLink);
+      updateActiveLink();
+
+      // ========== MODIFIED: Resume Download as PDF ==========
+      const resumeBtn = document.getElementById('resumeBtn');
+      if (resumeBtn) {
+        resumeBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          // Create a link to download the PDF file
+          const pdfUrl = 'raja_resume.pdf';
+          const link = document.createElement('a');
+          link.href = pdfUrl;
+          link.download = 'Raja_S_Resume.pdf';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+          showToast('Resume download started!', '#38bdf8');
+        });
+      }
+      // ========== END MODIFIED SECTION ==========
+
+      // ========== MODIFIED: Google Form Submission Handler with STRICT Email Validation ==========
+      const contactForm = document.getElementById('contactForm');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function (e) {
+          e.preventDefault();
+
+          // Get form input elements
+          const nameInput = contactForm.querySelector('input[placeholder="Your Name"]');
+          const emailInput = contactForm.querySelector('input[placeholder="Your Email"]');
+          const msgTextarea = contactForm.querySelector('textarea');
+
+          // Name validation
+          if (nameInput.value.trim() === '') {
+            showToast('Please enter your name.', '#ef4444');
+            return;
+          }
+
+          // Email validation - STRICT
+          const emailValue = emailInput.value.trim();
+          if (emailValue === '') {
+            showToast('Please enter your email address.', '#ef4444');
+            return;
+          }
+
+          // Comprehensive email regex - rejects invalid formats
+          const emailRegex = /^(?!\.)(?!.*\.\.)([a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-zA-Z0-9!#$%&'*+/=?^_`{|}~-]+)*)@([a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*\.[a-zA-Z]{2,})$/;
+
+          if (!emailRegex.test(emailValue)) {
+            showToast('Please enter a valid email address (e.g., name@domain.com).', '#ef4444');
+            return;
+          }
+
+          // Check for spaces in email
+          if (emailValue.includes(' ')) {
+            showToast('Email address cannot contain spaces.', '#ef4444');
+            return;
+          }
+
+          // Check email doesn't start or end with @
+          if (emailValue.startsWith('@') || emailValue.endsWith('@')) {
+            showToast('Email address is invalid (cannot start or end with @).', '#ef4444');
+            return;
+          }
+
+          // Check for consecutive dots
+          if (emailValue.includes('..')) {
+            showToast('Email address cannot contain consecutive dots.', '#ef4444');
+            return;
+          }
+
+          // Validate domain part structure
+          const domainPart = emailValue.split('@')[1];
+          if (domainPart) {
+            if (domainPart.startsWith('-') || domainPart.endsWith('-')) {
+              showToast('Please enter a valid email domain.', '#ef4444');
+              return;
+            }
+            if (domainPart.includes('--')) {
+              showToast('Please enter a valid email domain.', '#ef4444');
+              return;
+            }
+          }
+
+          // Message validation
+          if (msgTextarea.value.trim() === '') {
+            showToast('Please tell me about your project.', '#ef4444');
+            return;
+          }
+
+          // --- GOOGLE FORM SUBMISSION ---
+          // Google Form configuration using IDs extracted from the provided URL
+          const GOOGLE_FORM_ID = '1FAIpQLSeKTskvL4XyG9uncYSNE2aCjlIC7Mzq9dGjd8oMIJnxTqPqfw';
+          const FORM_ENTRY_IDS = {
+            name: 'entry.1345746856',
+            email: 'entry.1117149924',
+            message: 'entry.1773003349'
+          };
+
+          // Build Google Form URL with entry parameters
+          const formUrl = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
+
+          // Create FormData object to send silently
+          const formData = new FormData();
+          formData.append(FORM_ENTRY_IDS.name, nameInput.value.trim());
+          formData.append(FORM_ENTRY_IDS.email, emailValue);
+          formData.append(FORM_ENTRY_IDS.message, msgTextarea.value.trim());
+
+          // Send using fetch with no-cors (silent submission, no response needed)
+          fetch(formUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            body: formData
+          }).catch(err => {
+            // Silent fail - not showing error to user since no-cors doesn't return response
+            console.warn('Google Form submission background error:', err);
+          });
+          // --- END GOOGLE FORM SUBMISSION ---
+
+          // Show success message
+          showToast(`Thanks ${nameInput.value}! I'll get back to you soon.`, '#38bdf8');
+          contactForm.reset();
+        });
+      }
+      // ========== END MODIFIED SECTION ==========
+
+      function showToast(message, color) {
+        const existingToast = document.querySelector('.custom-toast');
+        if (existingToast) existingToast.remove();
+        const toast = document.createElement('div');
+        toast.className = 'custom-toast';
+        toast.textContent = message;
+        toast.style.position = 'fixed';
+        toast.style.bottom = '20px';
+        toast.style.left = '50%';
+        toast.style.transform = 'translateX(-50%)';
+        toast.style.backgroundColor = color;
+        toast.style.color = color === '#ef4444' ? 'white' : '#020617';
+        toast.style.fontWeight = '600';
+        toast.style.padding = '12px 24px';
+        toast.style.borderRadius = '40px';
+        toast.style.zIndex = '9999';
+        toast.style.fontSize = '0.9rem';
+        toast.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
+        document.body.appendChild(toast);
+        setTimeout(() => {
+          toast.style.opacity = '0';
+          setTimeout(() => toast.remove(), 500);
+        }, 3000);
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          const targetId = this.getAttribute('href');
+          if (targetId === "#" || targetId === "") return;
+          const targetElement = document.querySelector(targetId);
+          if (targetElement) {
+            e.preventDefault();
+            targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (navMenu && navMenu.classList.contains('active')) {
+              navMenu.classList.remove('active');
+              if (hamburger) {
+                const spans = hamburger.querySelectorAll('span');
+                spans[0].style.transform = 'none';
+                spans[1].style.opacity = '1';
+                spans[2].style.transform = 'none';
+              }
+            }
+          }
+        });
+      });
+
+      const disabledLinks = document.querySelectorAll('.project-link.disabled');
+      disabledLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          showToast('Live demo coming soon! Stay tuned.', '#38bdf8');
+        });
+      });
+
+      const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 70;
+      document.querySelectorAll('section').forEach(section => {
+        section.style.scrollMarginTop = `${navbarHeight + 20}px`;
+      });
+    })();
+
+    // ========== ADDED: Scroll to Top Button Functionality ==========
+    (function initScrollToTop() {
+      const scrollBtn = document.getElementById('scrollTopBtn');
+      if (!scrollBtn) return;
+
+      // Show/hide button based on scroll position
+      function toggleScrollButton() {
+        if (window.scrollY > 300) {
+          scrollBtn.classList.add('show');
+        } else {
+          scrollBtn.classList.remove('show');
+        }
+      }
+
+      // Smooth scroll to top when button is clicked
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+
+      // Add event listeners
+      window.addEventListener('scroll', toggleScrollButton);
+      scrollBtn.addEventListener('click', scrollToTop);
+
+      // Initial check
+      toggleScrollButton();
+    })();
+    // ========== END SCROLL TO TOP BUTTON FUNCTIONALITY ==========
+  </script>
 </body>
+
 </html>
