@@ -44,62 +44,67 @@
       line-height: 1.6;
       overflow-x: hidden;
       position: relative;
+      min-height: 100vh;
     }
-/* Custom Cursor Styles */
-body {
-  cursor: none;
-}
 
-.custom-cursor {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background: #38bdf8;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transition: transform 0.1s ease, width 0.2s, height 0.2s;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
-}
+    /* Custom Cursor Styles */
+    body {
+      cursor: none;
+    }
 
-.cursor-dot {
-  position: fixed;
-  width: 6px;
-  height: 6px;
-  background: white;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 99999;
-  transform: translate(-50%, -50%);
-  transition: 0.05s ease;
-}
+    .custom-cursor {
+      position: fixed;
+      width: 20px;
+      height: 20px;
+      background: #38bdf8;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transition: transform 0.1s ease, width 0.2s, height 0.2s;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 15px rgba(56, 189, 248, 0.6);
+    }
 
-/* Hover effect for interactive elements */
-a:hover ~ .custom-cursor,
-button:hover ~ .custom-cursor,
-.btn:hover ~ .custom-cursor,
-.project-card:hover ~ .custom-cursor,
-.skill-card:hover ~ .custom-cursor,
-.service-card:hover ~ .custom-cursor,
-input:hover ~ .custom-cursor,
-textarea:hover ~ .custom-cursor,
-.nav-link:hover ~ .custom-cursor {
-  width: 40px;
-  height: 40px;
-  background: rgba(56, 189, 248, 0.3);
-  backdrop-filter: blur(2px);
-}
+    .cursor-dot {
+      position: fixed;
+      width: 6px;
+      height: 6px;
+      background: white;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: 0.05s ease;
+    }
 
-/* Hide on touch devices */
-@media (max-width: 768px) {
-  body {
-    cursor: auto;
-  }
-  .custom-cursor, .cursor-dot {
-    display: none;
-  }
-}
+    /* Hover effect for interactive elements */
+    a:hover~.custom-cursor,
+    button:hover~.custom-cursor,
+    .btn:hover~.custom-cursor,
+    .project-card:hover~.custom-cursor,
+    .skill-card:hover~.custom-cursor,
+    .service-card:hover~.custom-cursor,
+    input:hover~.custom-cursor,
+    textarea:hover~.custom-cursor,
+    .nav-link:hover~.custom-cursor {
+      width: 40px;
+      height: 40px;
+      background: rgba(56, 189, 248, 0.3);
+      backdrop-filter: blur(2px);
+    }
+
+    /* Hide on touch devices */
+    @media (max-width: 768px) {
+      body {
+        cursor: auto;
+      }
+
+      .custom-cursor,
+      .cursor-dot {
+        display: none;
+      }
+    }
+
     /* 3D Background Container - Fixed behind content, modern professional effect */
     #three-bg {
       position: fixed;
@@ -180,6 +185,17 @@ textarea:hover ~ .custom-cursor,
 
       .container {
         padding: 0 1.5rem;
+      }
+      
+      /* Fix mobile top spacing: remove extra gap above hero */
+      .hero {
+        padding-top: 1.5rem !important;
+        min-height: auto;
+      }
+      
+      /* Reduce section header margin on mobile */
+      .section-header {
+        margin-bottom: 2rem;
       }
     }
 
@@ -343,10 +359,11 @@ textarea:hover ~ .custom-cursor,
 
     /* ========== HERO SECTION ========== */
     .hero {
-      min-height: 90vh;
+      min-height: 85vh;
       display: flex;
       align-items: center;
       position: relative;
+      padding-top: 0;
     }
 
     .hero-grid {
@@ -416,6 +433,7 @@ textarea:hover ~ .custom-cursor,
       .hero-grid {
         grid-template-columns: 1fr;
         text-align: center;
+        gap: 1.5rem;
       }
 
       .hero-desc {
@@ -424,6 +442,15 @@ textarea:hover ~ .custom-cursor,
 
       .hero-buttons {
         justify-content: center;
+      }
+      
+      .hero-title {
+        font-size: 2.2rem;
+      }
+      
+      .hero {
+        min-height: auto;
+        padding: 2rem 0 3rem 0;
       }
     }
 
@@ -801,26 +828,24 @@ textarea:hover ~ .custom-cursor,
       border-color: #38bdf8;
     }
 
-   .project-img {
-  height: 220px;
-  border: 3px solid #ffffff;
-  border-radius: 24px;
-  margin: 12px;
-  background: #0f172a;
+    .project-img {
+      height: 220px;
+      border: 3px solid #ffffff;
+      border-radius: 24px;
+      margin: 12px;
+      background: #0f172a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
 
-  display: flex;           
-  align-items: center;        
-  justify-content: center;    
-  overflow: hidden;
-}
-
-.project-img img {
-  max-width: 100%;   /* ✅ fit inside */
-  max-height: 100%;  /* ✅ fit inside */
-  object-fit: contain;  /* ✅ no crop */
-  display: block;
-}
-
+    .project-img img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      display: block;
+    }
 
     .project-content {
       padding: 1.5rem;
@@ -1214,10 +1239,7 @@ textarea:hover ~ .custom-cursor,
 </head>
 
 <body>
-
-  <!-- 3D Professional Background Canvas (lightweight modern) -->
   <canvas id="three-bg"></canvas>
-
   <nav class="navbar" id="navbar">
     <div class="container nav-container">
       <a href="#" class="logo">Raja<span class="dot"> </span>S</a>
@@ -1236,31 +1258,24 @@ textarea:hover ~ .custom-cursor,
       </ul>
     </div>
   </nav>
-
   <main>
-    <!-- Hero Section -->
     <section id="home" class="hero" data-aos="fade-up" data-aos-duration="1000">
       <div class="container hero-grid">
         <div class="hero-content" data-aos="fade-right" data-aos-delay="200">
           <div class="hero-badge">✨ Web Developer</div>
           <h1 class="hero-title">I build modern websites <br> for businesses <span class="wave">🚀</span></h1>
-          <p class="hero-desc">Helping businesses grow online with fast, responsive, and user-friendly websites. Let's
-            turn your vision into reality.</p>
+          <p class="hero-desc">Helping businesses grow online with fast, responsive, and user-friendly websites. Let's turn your vision into reality.</p>
           <div class="hero-buttons">
             <a href="#projects" class="btn btn-primary">View Projects</a>
             <a href="#contact" class="btn btn-outline">Contact Me</a>
             <a href="#" class="btn btn-outline" id="resumeBtn">Resume <i class="fas fa-download"></i></a>
           </div>
         </div>
-        <!-- NEW: Hero Right Side Image (Desktop Only) -->
         <div class="hero-image-side" data-aos="fade-left" data-aos-delay="300">
-          <img src="IMG_7269.JPG" alt="Raja S Portrait" class="hero-portrait-img"
-            onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f172a/38bdf8?text=Raja+S';">
+          <img src="IMG_7269.JPG" alt="Raja S Portrait" class="hero-portrait-img" onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f172a/38bdf8?text=Raja+S';">
         </div>
       </div>
     </section>
-
-    <!-- About Section -->
     <section id="about" class="about" data-aos="fade-up" data-aos-duration="800" data-aos-delay="100">
       <div class="container">
         <div class="section-header" data-aos="fade-down">
@@ -1270,40 +1285,27 @@ textarea:hover ~ .custom-cursor,
         <div class="about-grid" data-aos="zoom-in" data-aos-delay="200">
           <div class="about-left">
             <div class="about-text">
-              <p>Hi, I'm <strong>Raja S</strong>, a passionate Frontend Developer from Tamil Nadu, India. I graduated
-                with a B.Sc in Computer Science from Muthayammal Memorial College, where I discovered my love for
-                crafting clean, intuitive interfaces.</p>
-              <p>Over the past years, I've helped numerous small businesses and startups establish a strong online
-                presence. My approach combines modern design principles with performance-first development — ensuring
-                your website not only looks stunning but also loads fast and ranks well.</p>
-              <p>My goal is simple: <strong>build websites that drive growth</strong>. Whether you need a business
-                website, a high-converting landing page, or a complete redesign, I'm here to bring your brand to life
-                with code that's scalable and future-proof.</p>
+              <p>Hi, I'm <strong>Raja S</strong>, a passionate Frontend Developer from Tamil Nadu, India. I graduated with a B.Sc in Computer Science from Muthayammal Memorial College, where I discovered my love for crafting clean, intuitive interfaces.</p>
+              <p>Over the past years, I've helped numerous small businesses and startups establish a strong online presence. My approach combines modern design principles with performance-first development — ensuring your website not only looks stunning but also loads fast and ranks well.</p>
+              <p>My goal is simple: <strong>build websites that drive growth</strong>. Whether you need a business website, a high-converting landing page, or a complete redesign, I'm here to bring your brand to life with code that's scalable and future-proof.</p>
             </div>
             <div class="personal-details">
               <div class="detail-item"><i class="fas fa-map-marker-alt"></i> Tamil Nadu, India</div>
               <div class="detail-item"><i class="fas fa-graduation-cap"></i> B.Sc Computer Science</div>
-              <div class="detail-item"><i class="fas fa-laptop-code"></i> <span class="exp-highlight">2+ Years
-                  Experience</span></div>
+              <div class="detail-item"><i class="fas fa-laptop-code"></i> <span class="exp-highlight">2+ Years Experience</span></div>
             </div>
             <div class="stats-container">
-              <div class="stat-item"><span class="stat-number">2+</span><span class="stat-label">Projects
-                  Completed</span></div>
-              <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Client
-                  Satisfaction</span></div>
+              <div class="stat-item"><span class="stat-number">10+</span><span class="stat-label">Projects Completed</span></div>
+              <div class="stat-item"><span class="stat-number">100%</span><span class="stat-label">Client Satisfaction</span></div>
               <div class="stat-item"><span class="stat-number">24/7</span><span class="stat-label">Support</span></div>
             </div>
           </div>
           <div class="about-right">
-            <div class="professional-img-wrapper"><img src="IMG_7269.JPG" alt="Raja S - Professional Portrait"
-                class="about-professional-img"
-                onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f172a/38bdf8?text=Raja+S';"></div>
+            <div class="professional-img-wrapper"><img src="IMG_7269.JPG" alt="Raja S - Professional Portrait" class="about-professional-img" onerror="this.onerror=null; this.src='https://placehold.co/600x600/0f172a/38bdf8?text=Raja+S';"></div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Skills Section -->
     <section id="skills" class="skills" data-aos="fade-up" data-aos-duration="800">
       <div class="container">
         <div class="section-header" data-aos="fade-down"><span class="section-tag">Tech Stack</span>
@@ -1333,8 +1335,6 @@ textarea:hover ~ .custom-cursor,
         </div>
       </div>
     </section>
-
-    <!-- Services Section -->
     <section id="services" class="services" data-aos="fade-up" data-aos-duration="800">
       <div class="container">
         <div class="section-header" data-aos="fade-down"><span class="section-tag">What I Offer</span>
@@ -1349,8 +1349,7 @@ textarea:hover ~ .custom-cursor,
           <div class="service-card" data-aos="zoom-in-up" data-aos-delay="200">
             <div class="service-icon"><i class="fas fa-landmark"></i></div>
             <h3>Landing Pages</h3>
-            <p>High-converting, SEO-optimized landing pages designed for campaigns, product launches, and lead
-              generation.</p>
+            <p>High-converting, SEO-optimized landing pages designed for campaigns, product launches, and lead generation.</p>
           </div>
           <div class="service-card" data-aos="zoom-in-up" data-aos-delay="300">
             <div class="service-icon"><i class="fas fa-sync-alt"></i></div>
@@ -1360,8 +1359,6 @@ textarea:hover ~ .custom-cursor,
         </div>
       </div>
     </section>
-
-    <!-- Projects Section (images now have white border) -->
     <section id="projects" class="projects" data-aos="fade-up" data-aos-duration="800">
       <div class="container">
         <div class="section-header" data-aos="fade-down"><span class="section-tag">Featured Work</span>
@@ -1374,34 +1371,25 @@ textarea:hover ~ .custom-cursor,
               <h3>Paint Shop Website</h3>
               <p>Modern e-commerce style website for a local paint shop featuring product grid, color swatches.</p>
               <div class="project-tech"><span>HTML5</span><span>CSS3</span><span>JS</span></div>
-              <div class="project-links"><a href="https://s-rajaa.github.io/SMT/" target="_blank"
-                  class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a><a
-                  href="https://github.com/s-rajaa/SMT" target="_blank" class="project-link"><i
-                    class="fab fa-github"></i> GitHub</a></div>
+              <div class="project-links"><a href="https://s-rajaa.github.io/SMT/" target="_blank" class="project-link"><i class="fas fa-external-link-alt"></i> Live Demo</a><a href="https://github.com/s-rajaa/SMT" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a></div>
             </div>
           </div>
           <div class="project-card" data-aos="flip-up" data-aos-delay="200">
-            <div class="project-img"><img src="klc.png"
-                alt="Business Launchpad Website"></div>
+            <div class="project-img"><img src="klc.png" alt="Business Launchpad Website"></div>
             <div class="project-content">
               <h3>Business Launchpad</h3>
               <p>Corporate startup website with service sections, animated stats, responsive design.</p>
               <div class="project-tech"><span>HTML5</span><span>CSS Grid</span><span>JS</span></div>
-              <div class="project-links"><a href="#" class="project-link disabled">Live Demo (soon)</a><a
-                  href="https://github.com/s-rajaa" target="_blank" class="project-link"><i class="fab fa-github"></i>
-                  GitHub</a></div>
+              <div class="project-links"><a href="#" class="project-link disabled">Live Demo (soon)</a><a href="https://github.com/s-rajaa" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a></div>
             </div>
           </div>
           <div class="project-card" data-aos="flip-up" data-aos-delay="300">
-            <div class="project-img"><img src="https://placehold.co/600x400/0f172a/38bdf8?text=Analytics+Dashboard"
-                alt="Analytics Dashboard UI"></div>
+            <div class="project-img"><img src="https://placehold.co/600x400/0f172a/38bdf8?text=Analytics+Dashboard" alt="Analytics Dashboard UI"></div>
             <div class="project-content">
               <h3>Analytics Dashboard UI</h3>
               <p>Interactive data dashboard with charts and dark mode, complex UI and real-time data.</p>
               <div class="project-tech"><span>Chart.js</span><span>CSS</span><span>JS</span></div>
-              <div class="project-links"><a href="#" class="project-link disabled">Live Demo</a><a
-                  href="https://github.com/s-rajaa" target="_blank" class="project-link"><i class="fab fa-github"></i>
-                  GitHub</a></div>
+              <div class="project-links"><a href="#" class="project-link disabled">Live Demo</a><a href="https://github.com/s-rajaa" target="_blank" class="project-link"><i class="fab fa-github"></i> GitHub</a></div>
             </div>
           </div>
         </div>
@@ -1412,58 +1400,23 @@ textarea:hover ~ .custom-cursor,
           <div class="reviews-grid">
             <div class="review-card" data-aos="zoom-in" data-aos-delay="100">
               <div class="review-icon"><i class="fas fa-quote-left"></i></div>
-              <div class="review-text">
-                <p>"Raja did an amazing job on our company website! The design is modern, responsive, and loads quickly.
-                  He was professional and delivered before the deadline. Highly recommend!"</p>
-              </div>
-              <div class="reviewer">
-                <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
-                <div class="reviewer-info">
-                  <h4>Priya Sharma</h4>
-                  <p>Business Owner, TechSolutions</p>
-                  <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                      class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                </div>
-              </div>
+              <div class="review-text"><p>"Raja did an amazing job on our company website! The design is modern, responsive, and loads quickly. He was professional and delivered before the deadline. Highly recommend!"</p></div>
+              <div class="reviewer"><div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div><div class="reviewer-info"><h4>Priya Sharma</h4><p>Business Owner, TechSolutions</p><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
             </div>
             <div class="review-card" data-aos="zoom-in" data-aos-delay="200">
               <div class="review-icon"><i class="fas fa-quote-left"></i></div>
-              <div class="review-text">
-                <p>"Working with Raja was a pleasure. He understood our requirements perfectly and created a stunning
-                  landing page that increased our conversions by 40%. Great attention to detail!"</p>
-              </div>
-              <div class="reviewer">
-                <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
-                <div class="reviewer-info">
-                  <h4>Arun Kumar</h4>
-                  <p>Marketing Director, BrandCraft</p>
-                  <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                      class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                </div>
-              </div>
+              <div class="review-text"><p>"Working with Raja was a pleasure. He understood our requirements perfectly and created a stunning landing page that increased our conversions by 40%. Great attention to detail!"</p></div>
+              <div class="reviewer"><div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div><div class="reviewer-info"><h4>Arun Kumar</h4><p>Marketing Director, BrandCraft</p><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
             </div>
             <div class="review-card" data-aos="zoom-in" data-aos-delay="300">
               <div class="review-icon"><i class="fas fa-quote-left"></i></div>
-              <div class="review-text">
-                <p>"Excellent frontend developer! Raja transformed our outdated website into a modern, fast, and
-                  user-friendly platform. The code is clean and well-structured. Will hire again!"</p>
-              </div>
-              <div class="reviewer">
-                <div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div>
-                <div class="reviewer-info">
-                  <h4>Meera Iyer</h4>
-                  <p>Founder, StartUpHub</p>
-                  <div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i
-                      class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
-                </div>
-              </div>
+              <div class="review-text"><p>"Excellent frontend developer! Raja transformed our outdated website into a modern, fast, and user-friendly platform. The code is clean and well-structured. Will hire again!"</p></div>
+              <div class="reviewer"><div class="reviewer-avatar"><i class="fas fa-user-circle"></i></div><div class="reviewer-info"><h4>Meera Iyer</h4><p>Founder, StartUpHub</p><div class="review-stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div></div></div>
             </div>
           </div>
         </div>
       </div>
     </section>
-
-    <!-- Contact Section -->
     <section id="contact" class="contact" data-aos="fade-up" data-aos-duration="800">
       <div class="container">
         <div class="section-header" data-aos="fade-down"><span class="section-tag">Get In Touch</span>
@@ -1471,28 +1424,13 @@ textarea:hover ~ .custom-cursor,
         </div>
         <div class="contact-grid">
           <div class="contact-info-card" data-aos="fade-right" data-aos-delay="100">
-            <div class="contact-detail"><i class="fas fa-phone-alt"></i>
-              <div><strong>Phone</strong><br><a href="tel:+919047854498">+91 90478 54498</a></div>
-            </div>
-            <div class="contact-detail"><i class="fas fa-envelope"></i>
-              <div><strong>Email</strong><br><a href="mailto:rajaasanthii@gmail.com">rajaasanthii@gmail.com</a></div>
-            </div>
-            <div class="contact-detail"><i class="fab fa-github"></i>
-              <div><strong>GitHub</strong><br><a href="https://github.com/s-rajaa"
-                  target="_blank">github.com/s-rajaa</a></div>
-            </div>
-            <div class="contact-detail whatsapp"><i class="fab fa-whatsapp"></i>
-              <div><strong>WhatsApp</strong><br><a
-                  href="https://wa.me/919047854498?text=Hello%20Raja%2C%20I%27m%20interested%20in%20your%20web%20development%20services!"
-                  target="_blank">Click to chat →</a></div>
-            </div>
+            <div class="contact-detail"><i class="fas fa-phone-alt"></i><div><strong>Phone</strong><br><a href="tel:+919047854498">+91 90478 54498</a></div></div>
+            <div class="contact-detail"><i class="fas fa-envelope"></i><div><strong>Email</strong><br><a href="mailto:rajaasanthii@gmail.com">rajaasanthii@gmail.com</a></div></div>
+            <div class="contact-detail"><i class="fab fa-github"></i><div><strong>GitHub</strong><br><a href="https://github.com/s-rajaa" target="_blank">github.com/s-rajaa</a></div></div>
+            <div class="contact-detail whatsapp"><i class="fab fa-whatsapp"></i><div><strong>WhatsApp</strong><br><a href="https://wa.me/919047854498?text=Hello%20Raja%2C%20I%27m%20interested%20in%20your%20web%20development%20services!" target="_blank">Click to chat →</a></div></div>
           </div>
           <div class="contact-form" data-aos="fade-left" data-aos-delay="150">
-            <form id="contactForm"><input type="text" name="entry.1345746856" placeholder="Your Name"
-                autocomplete="new-name" required><input type="email" name="entry.1117149924" placeholder="Your Email"
-                autocomplete="new-email" required><textarea name="entry.1773003349" rows="4"
-                placeholder="Tell me about your project..." autocomplete="off"></textarea><button type="submit"
-                class="btn btn-primary full-width">Send Message <i class="fas fa-paper-plane"></i></button></form>
+            <form id="contactForm"><input type="text" name="entry.1345746856" placeholder="Your Name" autocomplete="new-name" required><input type="email" name="entry.1117149924" placeholder="Your Email" autocomplete="new-email" required><textarea name="entry.1773003349" rows="4" placeholder="Tell me about your project..." autocomplete="off"></textarea><button type="submit" class="btn btn-primary full-width">Send Message <i class="fas fa-paper-plane"></i></button></form>
           </div>
         </div>
       </div>
@@ -1502,18 +1440,12 @@ textarea:hover ~ .custom-cursor,
     <div class="container">
       <div class="footer-content">
         <p>© 2025 Raja S — Frontend Developer. All rights reserved.</p>
-        <div class="footer-social"><a href="https://github.com/s-rajaa" target="_blank"><i
-              class="fab fa-github"></i></a><a href="https://wa.me/919047854498" target="_blank"><i
-              class="fab fa-whatsapp"></i></a><a href="mailto:rajaasanthii@gmail.com"><i
-              class="fas fa-envelope"></i></a></div>
+        <div class="footer-social"><a href="https://github.com/s-rajaa" target="_blank"><i class="fab fa-github"></i></a><a href="https://wa.me/919047854498" target="_blank"><i class="fab fa-whatsapp"></i></a><a href="mailto:rajaasanthii@gmail.com"><i class="fas fa-envelope"></i></a></div>
       </div>
     </div>
   </footer>
   <button class="scroll-top-btn" id="scrollTopBtn" aria-label="Scroll to top"><i class="fas fa-arrow-up"></i></button>
-
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-  <!-- Three.js Background script (lightweight + smooth) -->
   <script type="module">
     import * as THREE from 'three';
     const canvasBg = document.getElementById('three-bg');
@@ -1523,7 +1455,6 @@ textarea:hover ~ .custom-cursor,
     const renderer = new THREE.WebGLRenderer({ canvas: canvasBg, alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio);
-    // floating particles
     const particleCount = 1200;
     const geometry = new THREE.BufferGeometry();
     const positions = new Float32Array(particleCount * 3);
@@ -1536,7 +1467,6 @@ textarea:hover ~ .custom-cursor,
     const material = new THREE.PointsMaterial({ color: 0x38bdf8, size: 0.12, transparent: true, opacity: 0.4, blending: THREE.AdditiveBlending });
     const particles = new THREE.Points(geometry, material);
     scene.add(particles);
-    // extra glow effect with second particle system
     const geometry2 = new THREE.BufferGeometry();
     const pos2 = new Float32Array(600 * 3);
     for (let i = 0; i < 600; i++) {
@@ -1565,18 +1495,12 @@ textarea:hover ~ .custom-cursor,
       renderer.setSize(window.innerWidth, window.innerHeight);
     });
   </script>
-
-  <!-- Original Cinematic Canvas (preserved) and other scripts combined -->
-  <
-
   <script>
     AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
-    // Force AOS refresh on mobile to ensure animations work
     if (window.innerWidth <= 768) {
       setTimeout(() => { AOS.refresh(); }, 200);
       window.addEventListener('resize', () => { AOS.refresh(); });
     }
-    // rest of navbar, form, etc (preserved)
     (function () {
       const navbar = document.getElementById('navbar');
       const navLinks = document.querySelectorAll('.nav-link');
@@ -1596,76 +1520,38 @@ textarea:hover ~ .custom-cursor,
       const navbarHeight = document.querySelector('.navbar')?.offsetHeight || 70; document.querySelectorAll('section').forEach(section => { section.style.scrollMarginTop = `${navbarHeight + 20}px`; });
       const scrollBtn = document.getElementById('scrollTopBtn'); if (scrollBtn) { window.addEventListener('scroll', () => { if (window.scrollY > 300) scrollBtn.classList.add('show'); else scrollBtn.classList.remove('show'); }); scrollBtn.addEventListener('click', () => { window.scrollTo({ top: 0, behavior: 'smooth' }); }); }
     })();
-
-    <!-- Custom Cursor Script -->
-(function() {
-  // Only run on desktop devices
-  if (window.innerWidth <= 768) return;
-  
-  // Create cursor elements
-  const cursor = document.createElement('div');
-  cursor.className = 'custom-cursor';
-  const cursorDot = document.createElement('div');
-  cursorDot.className = 'cursor-dot';
-  document.body.appendChild(cursor);
-  document.body.appendChild(cursorDot);
-  
-  let mouseX = 0, mouseY = 0;
-  let cursorX = 0, cursorY = 0;
-  let dotX = 0, dotY = 0;
-  
-  // Track mouse position
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
-  
-  // Smooth animation for cursor
-  function animate() {
-    // Smooth follow for main cursor
-    cursorX += (mouseX - cursorX) * 0.2;
-    cursorY += (mouseY - cursorY) * 0.2;
-    cursor.style.left = cursorX + 'px';
-    cursor.style.top = cursorY + 'px';
-    
-    // Faster follow for dot
-    dotX += (mouseX - dotX) * 0.3;
-    dotY += (mouseY - dotY) * 0.3;
-    cursorDot.style.left = dotX + 'px';
-    cursorDot.style.top = dotY + 'px';
-    
-    requestAnimationFrame(animate);
-  }
-  
-  animate();
-  
-  // Add hover effect for interactive elements
-  const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .service-card, input, textarea, .nav-link');
-  
-  interactiveElements.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1.5)';
-      cursor.style.background = 'rgba(56, 189, 248, 0.4)';
-      cursorDot.style.opacity = '0';
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.style.transform = 'translate(-50%, -50%) scale(1)';
-      cursor.style.background = '#38bdf8';
-      cursorDot.style.opacity = '1';
-    });
-  });
-  
-  // Hide cursor when leaving window
-  document.addEventListener('mouseleave', () => {
-    cursor.style.opacity = '0';
-    cursorDot.style.opacity = '0';
-  });
-  
-  document.addEventListener('mouseenter', () => {
-    cursor.style.opacity = '1';
-    cursorDot.style.opacity = '1';
-  });
-})();
+    (function() {
+      if (window.innerWidth <= 768) return;
+      const cursor = document.createElement('div');
+      cursor.className = 'custom-cursor';
+      const cursorDot = document.createElement('div');
+      cursorDot.className = 'cursor-dot';
+      document.body.appendChild(cursor);
+      document.body.appendChild(cursorDot);
+      let mouseX = 0, mouseY = 0;
+      let cursorX = 0, cursorY = 0;
+      let dotX = 0, dotY = 0;
+      document.addEventListener('mousemove', (e) => { mouseX = e.clientX; mouseY = e.clientY; });
+      function animate() {
+        cursorX += (mouseX - cursorX) * 0.2;
+        cursorY += (mouseY - cursorY) * 0.2;
+        cursor.style.left = cursorX + 'px';
+        cursor.style.top = cursorY + 'px';
+        dotX += (mouseX - dotX) * 0.3;
+        dotY += (mouseY - dotY) * 0.3;
+        cursorDot.style.left = dotX + 'px';
+        cursorDot.style.top = dotY + 'px';
+        requestAnimationFrame(animate);
+      }
+      animate();
+      const interactiveElements = document.querySelectorAll('a, button, .btn, .project-card, .skill-card, .service-card, input, textarea, .nav-link');
+      interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1.5)'; cursor.style.background = 'rgba(56, 189, 248, 0.4)'; cursorDot.style.opacity = '0'; });
+        el.addEventListener('mouseleave', () => { cursor.style.transform = 'translate(-50%, -50%) scale(1)'; cursor.style.background = '#38bdf8'; cursorDot.style.opacity = '1'; });
+      });
+      document.addEventListener('mouseleave', () => { cursor.style.opacity = '0'; cursorDot.style.opacity = '0'; });
+      document.addEventListener('mouseenter', () => { cursor.style.opacity = '1'; cursorDot.style.opacity = '1'; });
+    })();
   </script>
 </body>
 
