@@ -188,7 +188,6 @@
         padding: 0 1.5rem;
       }
 
-      /* FIXED: Remove extra top space on mobile */
       .hero {
         padding-top: 1rem !important;
         min-height: auto;
@@ -242,16 +241,29 @@
       justify-content: center;
     }
 
-    /* ========== NAVBAR ========== */
+    /* ========== NAVBAR - FIXED POSITION ========== */
     .navbar {
-      position: sticky;
+      position: fixed;
       top: 0;
+      left: 0;
+      width: 100%;
       z-index: 1000;
       background: rgba(2, 6, 23, 0.95);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid rgba(56, 189, 248, 0.2);
       padding: 1rem 0;
       transition: all 0.3s;
+    }
+
+    /* Add padding to body to prevent content hiding under fixed navbar */
+    body {
+      padding-top: 74px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding-top: 70px;
+      }
     }
 
     .nav-container {
@@ -341,7 +353,7 @@
         background: #0f172a;
         width: 100%;
         text-align: center;
-        transition: 0.3s;
+        transition: 0.3s ease;
         gap: 1.5rem;
         padding: 2rem 0;
         backdrop-filter: blur(10px);
@@ -531,7 +543,7 @@
     .stat-item {
       text-align: center;
       flex: 1;
-      min-width: 70px;
+      min-width: 90px;
       transition: all 0.3s ease;
     }
 
@@ -1240,23 +1252,22 @@
   <script>
     AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
 
-    // Navbar functionality
+    // Navbar functionality - FIXED for mobile refresh
     const navbar = document.getElementById('navbar');
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section');
 
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 10px 30px -10px rgba(0,0,0,0.3)';
-      } else {
-        navbar.style.boxShadow = 'none';
-      }
-    });
+    // Ensure navbar is visible and fixed on mobile after refresh
+    if (navbar) {
+      navbar.style.display = 'block';
+    }
 
+    // Hamburger menu toggle
     if (hamburger) {
-      hamburger.addEventListener('click', () => {
+      hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
         navMenu.classList.toggle('active');
         const spans = hamburger.querySelectorAll('span');
         if (navMenu.classList.contains('active')) {
@@ -1271,21 +1282,25 @@
       });
     }
 
+    // Close mobile menu when clicking a nav link
     navLinks.forEach(link => {
       link.addEventListener('click', () => {
         if (navMenu.classList.contains('active')) {
           navMenu.classList.remove('active');
-          const spans = hamburger.querySelectorAll('span');
-          spans[0].style.transform = 'none';
-          spans[1].style.opacity = '1';
-          spans[2].style.transform = 'none';
+          if (hamburger) {
+            const spans = hamburger.querySelectorAll('span');
+            spans[0].style.transform = 'none';
+            spans[1].style.opacity = '1';
+            spans[2].style.transform = 'none';
+          }
         }
       });
     });
 
+    // Active link highlighting on scroll
     function updateActiveLink() {
       let current = '';
-      const scrollPos = window.scrollY + 150;
+      const scrollPos = window.scrollY + 100;
       sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
@@ -1315,17 +1330,20 @@
       });
     });
 
-    // Resume download
+    // Resume download with correct filename "Raja_Resume.pdf"
     document.getElementById('resumeBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
+      // Create a sample resume content or trigger download
       const link = document.createElement('a');
-      link.href = 'raja_resume.pdf';
-      link.download = 'Raja_S_Resume.pdf';
+      link.href = 'Raja_Resume.pdf';
+      link.download = 'Raja_Resume.pdf';
+      document.body.appendChild(link);
       link.click();
+      document.body.removeChild(link);
       showToast('Resume download started!', '#38bdf8');
     });
 
-    // Contact form
+    // Contact form handler
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
@@ -1369,7 +1387,7 @@
       });
     });
 
-    // Custom cursor (FIXED - no horizontal scroll)
+    // Custom cursor - desktop only, no scroll issues
     if (window.innerWidth > 768) {
       const cursor = document.createElement('div');
       cursor.className = 'custom-cursor';
