@@ -1341,8 +1341,8 @@
       const blob = new Blob([pdfContent], { type: 'application/pdf' });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
-      link.href = Raja_Resume.pdf;
-      link.download = 'Raja_Resume';
+      link.href = url;
+      link.download = 'Raja_Resume.pdf';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
