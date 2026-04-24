@@ -1329,24 +1329,17 @@
       });
     });
 
-    // RESUME DOWNLOAD - FIXED with proper success message
+    // RESUME DOWNLOAD - DOWNLOADS YOUR ACTUAL Raja_Resume.pdf FILE
     document.getElementById('resumeBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
       
-      // Create a sample PDF resume content (base64 encoded PDF)
-      // This is a valid PDF file content
-      const pdfContent = '%PDF-1.4\n1 0 obj\n<<\n/Type /Catalog\n/Pages 2 0 R\n>>\nendobj\n2 0 obj\n<<\n/Type /Pages\n/Kids [3 0 R]\n/Count 1\n>>\nendobj\n3 0 obj\n<<\n/Type /Page\n/Parent 2 0 R\n/MediaBox [0 0 612 792]\n/Contents 4 0 R\n/Resources <<\n/Font <<\n/F1 <<\n/Type /Font\n/Subtype /Type1\n/BaseFont /Helvetica\n>>\n>>\n>>\n>>\nendobj\n4 0 obj\n<<\n/Length 100\n>>\nstream\nBT\n/F1 24 Tf\n100 700 Td\n(Raja S - Resume) Tj\n/F1 12 Tf\n0 -40 Td\n(Frontend Developer) Tj\n0 -30 Td\n(Email: rajaasanthii@gmail.com) Tj\n0 -20 Td\n(Phone: +91 90478 54498) Tj\nET\nendstream\nendobj\nxref\n0 5\n0000000000 65535 f\n0000000009 00000 n\n0000000058 00000 n\n0000000115 00000 n\n0000000261 00000 n\ntrailer\n<<\n/Size 5\n/Root 1 0 R\n>>\nstartxref\n385\n%%EOF';
-      
-      // Convert to blob and download
-      const blob = new Blob([pdfContent], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
+      // This downloads YOUR actual Raja_Resume.pdf file from your server
       const link = document.createElement('a');
-      link.href = url;
+      link.href = 'Raja_Resume.pdf';
       link.download = 'Raja_Resume.pdf';
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      URL.revokeObjectURL(url);
       
       showToast('Resume downloaded successfully!', '#38bdf8');
     });
