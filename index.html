@@ -47,7 +47,7 @@
       min-height: 100vh;
     }
 
-    /* Custom Cursor Styles - FIXED to prevent horizontal scroll */
+    /* Custom Cursor Styles */
     @media (min-width: 769px) {
       body {
         cursor: none;
@@ -78,21 +78,6 @@
         transform: translate(-50%, -50%);
         transition: 0.05s linear;
         will-change: left, top;
-      }
-
-      a:hover~.custom-cursor,
-      button:hover~.custom-cursor,
-      .btn:hover~.custom-cursor,
-      .project-card:hover~.custom-cursor,
-      .skill-card:hover~.custom-cursor,
-      .service-card:hover~.custom-cursor,
-      input:hover~.custom-cursor,
-      textarea:hover~.custom-cursor,
-      .nav-link:hover~.custom-cursor {
-        width: 40px;
-        height: 40px;
-        background: rgba(56, 189, 248, 0.3);
-        backdrop-filter: blur(2px);
       }
     }
 
@@ -417,11 +402,6 @@
       aspect-ratio: 1 / 1;
     }
 
-    .hero-portrait-img:hover {
-      transform: scale(1.02);
-      box-shadow: 0 30px 45px -12px rgba(56, 189, 248, 0.4);
-    }
-
     @media (max-width: 768px) {
       .hero-image-side {
         display: none !important;
@@ -500,7 +480,6 @@
       color: #cbd5e1;
       font-size: 0.9rem;
       font-weight: 500;
-      transition: transform 0.2s ease, color 0.2s ease;
     }
 
     .detail-item i {
@@ -532,7 +511,6 @@
       text-align: center;
       flex: 1;
       min-width: 90px;
-      transition: all 0.3s ease;
     }
 
     .stat-number {
@@ -607,7 +585,6 @@
       font-size: 2.5rem;
       color: #38bdf8;
       margin-bottom: 1rem;
-      transition: all 0.3s ease;
     }
 
     .skill-card h3 {
@@ -651,7 +628,6 @@
       justify-content: center;
       border-radius: 20px;
       margin-bottom: 1.5rem;
-      transition: all 0.3s ease;
     }
 
     .service-icon i {
@@ -812,6 +788,7 @@
       border: 1px solid rgba(56, 189, 248, 0.2);
     }
 
+    /* FIXED: Input styles with proper text color */
     .contact-form input,
     .contact-form textarea {
       width: 100%;
@@ -820,9 +797,15 @@
       background: #020617;
       border: 1px solid #1e293b;
       border-radius: 20px;
-      color: white;
+      color: #ffffff !important;
       font-family: 'Inter', sans-serif;
       transition: all 0.3s ease;
+      font-size: 1rem;
+    }
+
+    .contact-form input::placeholder,
+    .contact-form textarea::placeholder {
+      color: #64748b;
     }
 
     .contact-form input:focus,
@@ -830,6 +813,26 @@
       outline: none;
       border-color: #38bdf8;
       box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.1);
+    }
+
+    .contact-form input:hover,
+    .contact-form textarea:hover {
+      border-color: rgba(56, 189, 248, 0.5);
+    }
+
+    /* Fix autofill background color */
+    .contact-form input:-webkit-autofill,
+    .contact-form input:-webkit-autofill:hover,
+    .contact-form input:-webkit-autofill:focus,
+    .contact-form input:-webkit-autofill:active,
+    .contact-form textarea:-webkit-autofill,
+    .contact-form textarea:-webkit-autofill:hover,
+    .contact-form textarea:-webkit-autofill:focus,
+    .contact-form textarea:-webkit-autofill:active {
+      -webkit-box-shadow: 0 0 0 30px #020617 inset !important;
+      -webkit-text-fill-color: #ffffff !important;
+      caret-color: #ffffff !important;
+      transition: background-color 5000s ease-in-out 0s;
     }
 
     @media (max-width: 800px) {
@@ -951,7 +954,7 @@
       color: #fbbf24;
     }
 
-    /* ========== SCROLL BUTTON ========== */
+    /* ========== SCROLL BUTTON & TOAST ========== */
     .custom-toast {
       position: fixed;
       bottom: 20px;
@@ -1150,13 +1153,13 @@
             <div class="contact-detail"><i class="fas fa-phone-alt"></i><div><strong>Phone</strong><br><a href="tel:+919047854498">+91 90478 54498</a></div></div>
             <div class="contact-detail"><i class="fas fa-envelope"></i><div><strong>Email</strong><br><a href="mailto:rajaasanthii@gmail.com">rajaasanthii@gmail.com</a></div></div>
             <div class="contact-detail"><i class="fab fa-github"></i><div><strong>GitHub</strong><br><a href="https://github.com/s-rajaa" target="_blank">github.com/s-rajaa</a></div></div>
-            <div class="contact-detail"><i class="fab fa-whatsapp"></i><div><strong>WhatsApp</strong><br><a href="https://wa.me/919047854498?text=Hello%20Raja" target="_blank">Click to chat →</a></div></div>
+            <div class="contact-detail"><i class="fab fa-whatsapp"></i><div><strong>WhatsApp</strong><br><a href="https://wa.me/919047854498?text=Hello%20Raja%2C%20I%27m%20interested%20in%20your%20web%20development%20services!" target="_blank">Click to chat →</a></div></div>
           </div>
           <div class="contact-form">
             <form id="contactForm">
-              <input type="text" placeholder="Your Name" required>
-              <input type="email" placeholder="Your Email" required>
-              <textarea rows="4" placeholder="Tell me about your project..."></textarea>
+              <input type="text" name="entry.1345746856" placeholder="Your Name" required>
+              <input type="email" name="entry.1117149924" placeholder="Your Email" required>
+              <textarea name="entry.1773003349" rows="4" placeholder="Tell me about your project..."></textarea>
               <button type="submit" class="btn btn-primary full-width">Send Message <i class="fas fa-paper-plane"></i></button>
             </form>
           </div>
@@ -1238,7 +1241,7 @@
   </script>
 
   <script>
-    // CRITICAL FIX: Set body padding top based on actual navbar height to prevent content from going up on refresh
+    // Set body padding top based on navbar height
     function setBodyPadding() {
       const navbar = document.querySelector('.navbar');
       if (navbar) {
@@ -1246,13 +1249,9 @@
         document.body.style.paddingTop = navbarHeight + 'px';
       }
     }
-    
-    // Run immediately on page load
     setBodyPadding();
-    
-    // Also run on window resize
     window.addEventListener('resize', setBodyPadding);
-    
+
     // Initialize AOS
     AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
 
@@ -1262,11 +1261,6 @@
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section');
-
-    // Ensure navbar is visible
-    if (navbar) {
-      navbar.style.display = 'block';
-    }
 
     // Hamburger menu toggle
     if (hamburger) {
@@ -1301,7 +1295,7 @@
       });
     });
 
-    // Active link highlighting on scroll
+    // Active link highlighting
     function updateActiveLink() {
       let current = '';
       const scrollPos = window.scrollY + 100;
@@ -1321,7 +1315,7 @@
     window.addEventListener('scroll', updateActiveLink);
     updateActiveLink();
 
-    // Smooth scroll for anchor links with offset for fixed navbar
+    // Smooth scroll with offset for fixed navbar
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const targetId = this.getAttribute('href');
@@ -1336,7 +1330,7 @@
       });
     });
 
-    // Resume download with correct filename "Raja_Resume.pdf"
+    // Resume download - Raja_Resume.pdf
     document.getElementById('resumeBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
       const link = document.createElement('a');
@@ -1348,19 +1342,53 @@
       showToast('Resume download started!', '#38bdf8');
     });
 
-    // Contact form handler
+    // Google Form submission - WORKING
     const contactForm = document.getElementById('contactForm');
     if (contactForm) {
       contactForm.addEventListener('submit', function(e) {
         e.preventDefault();
-        const name = this.querySelector('input[placeholder="Your Name"]').value.trim();
-        const email = this.querySelector('input[placeholder="Your Email"]').value.trim();
-        const msg = this.querySelector('textarea').value.trim();
-        if (!name) return showToast('Please enter your name.', '#ef4444');
-        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return showToast('Please enter a valid email.', '#ef4444');
-        if (!msg) return showToast('Please tell me about your project.', '#ef4444');
+        
+        const nameInput = this.querySelector('input[placeholder="Your Name"]');
+        const emailInput = this.querySelector('input[placeholder="Your Email"]');
+        const msgTextarea = this.querySelector('textarea');
+        
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const message = msgTextarea.value.trim();
+        
+        if (!name) {
+          showToast('Please enter your name.', '#ef4444');
+          return;
+        }
+        
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email || !emailRegex.test(email)) {
+          showToast('Please enter a valid email address.', '#ef4444');
+          return;
+        }
+        
+        if (!message) {
+          showToast('Please tell me about your project.', '#ef4444');
+          return;
+        }
+        
+        // Google Form ID
+        const GOOGLE_FORM_ID = '1FAIpQLSeKTskvL4XyG9uncYSNE2aCjlIC7Mzq9dGjd8oMIJnxTqPqfw';
+        const formUrl = `https://docs.google.com/forms/d/e/${GOOGLE_FORM_ID}/formResponse`;
+        
+        const formData = new FormData();
+        formData.append('entry.1345746856', name);
+        formData.append('entry.1117149924', email);
+        formData.append('entry.1773003349', message);
+        
+        fetch(formUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          body: formData
+        }).catch(() => {});
+        
         showToast(`Thanks ${name}! I'll get back to you soon.`, '#38bdf8');
-        this.reset();
+        contactForm.reset();
       });
     }
 
@@ -1373,7 +1401,10 @@
       toast.style.backgroundColor = color;
       toast.style.color = color === '#ef4444' ? 'white' : '#020617';
       document.body.appendChild(toast);
-      setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 300); }, 3000);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
     }
 
     // Scroll to top button
@@ -1392,7 +1423,7 @@
       });
     });
 
-    // Custom cursor - desktop only, no scroll issues
+    // Custom cursor - desktop only
     if (window.innerWidth > 768) {
       const cursor = document.createElement('div');
       cursor.className = 'custom-cursor';
