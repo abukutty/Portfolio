@@ -189,7 +189,6 @@
       }
 
       .hero {
-        padding-top: 1rem !important;
         min-height: auto;
       }
 
@@ -253,17 +252,6 @@
       border-bottom: 1px solid rgba(56, 189, 248, 0.2);
       padding: 1rem 0;
       transition: all 0.3s;
-    }
-
-    /* Add padding to body to prevent content hiding under fixed navbar */
-    body {
-      padding-top: 74px;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        padding-top: 70px;
-      }
     }
 
     .nav-container {
@@ -459,7 +447,7 @@
 
       .hero {
         min-height: auto;
-        padding: 1.5rem 0 2.5rem 0;
+        padding: 1rem 0 2.5rem 0;
       }
     }
 
@@ -1250,16 +1238,32 @@
   </script>
 
   <script>
+    // CRITICAL FIX: Set body padding top based on actual navbar height to prevent content from going up on refresh
+    function setBodyPadding() {
+      const navbar = document.querySelector('.navbar');
+      if (navbar) {
+        const navbarHeight = navbar.offsetHeight;
+        document.body.style.paddingTop = navbarHeight + 'px';
+      }
+    }
+    
+    // Run immediately on page load
+    setBodyPadding();
+    
+    // Also run on window resize
+    window.addEventListener('resize', setBodyPadding);
+    
+    // Initialize AOS
     AOS.init({ duration: 800, easing: 'ease-in-out', once: true, offset: 100 });
 
-    // Navbar functionality - FIXED for mobile refresh
+    // Navbar functionality
     const navbar = document.getElementById('navbar');
     const hamburger = document.getElementById('hamburger');
     const navMenu = document.getElementById('nav-menu');
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section');
 
-    // Ensure navbar is visible and fixed on mobile after refresh
+    // Ensure navbar is visible
     if (navbar) {
       navbar.style.display = 'block';
     }
@@ -1317,7 +1321,7 @@
     window.addEventListener('scroll', updateActiveLink);
     updateActiveLink();
 
-    // Smooth scroll for anchor links
+    // Smooth scroll for anchor links with offset for fixed navbar
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
       anchor.addEventListener('click', function(e) {
         const targetId = this.getAttribute('href');
@@ -1325,7 +1329,9 @@
         const target = document.querySelector(targetId);
         if (target) {
           e.preventDefault();
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          const navbarHeight = document.querySelector('.navbar').offsetHeight;
+          const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+          window.scrollTo({ top: targetPosition, behavior: 'smooth' });
         }
       });
     });
@@ -1333,7 +1339,6 @@
     // Resume download with correct filename "Raja_Resume.pdf"
     document.getElementById('resumeBtn')?.addEventListener('click', (e) => {
       e.preventDefault();
-      // Create a sample resume content or trigger download
       const link = document.createElement('a');
       link.href = 'Raja_Resume.pdf';
       link.download = 'Raja_Resume.pdf';
